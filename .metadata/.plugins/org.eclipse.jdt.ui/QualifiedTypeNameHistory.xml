@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="com.excilys.ui.MenuCLI"/>
+    <fullyQualifiedTypeName name="com.excilys.exceptions.ExceptionListeComputerVide"/>
+    <fullyQualifiedTypeName name="com.excilys.exceptions.ExceptionComputerVide"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpServletResponse"/>
+    <fullyQualifiedTypeName name="javax.servlet.ServletException"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+    <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
+    <fullyQualifiedTypeName name="java.io.PrintWriter"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.excilys.dto.ComputerDTO"/>
+    <fullyQualifiedTypeName name="com.excilys.model.Computer"/>
+    <fullyQualifiedTypeName name="com.excilys.service.Service"/>
+    <fullyQualifiedTypeName name="com.excilys.persistence.Dao"/>
+</qualifiedTypeNameHistroy>

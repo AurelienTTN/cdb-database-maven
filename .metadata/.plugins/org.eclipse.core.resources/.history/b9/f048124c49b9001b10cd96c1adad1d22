@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<%-- Elle a le même effet que le code Java suivant : --%>
+<% 
+com.excilys.beans.BeanTest coyote = (com.excilys.beans.BeanTest) request.getAttribute( "coyote" ); 
+if ( coyote == null ){
+    coyote = new com.excilys.beans.BeanTest();
+    request.setAttribute( "coyote", coyote );
+}
+%>
+
+</body>
+</html>

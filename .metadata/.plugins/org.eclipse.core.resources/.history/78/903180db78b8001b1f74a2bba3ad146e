@@ -1,0 +1,15 @@
+package com.excilys.exceptions;
+
+public class ExceptionListeComputerVide extends Exception{
+	
+
+	public ExceptionListeComputerVide() {
+		super();
+	}
+	
+	public ExceptionListeComputerVide() {
+		super(String s);
+	}
+	
+
+}

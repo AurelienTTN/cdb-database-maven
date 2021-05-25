@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Test des expressions EL</title>
+    </head>
+    <body>
+  <%@ page import="java.util.List, java.util.ArrayList" %>
+	  <%
+		List<Integer> list = (ArrayList<Integer>)request.getAttribute("tirage");
+	  %>
+	  <c:forEach var="item" items="${tirage}" >
+	<c:out value="${item}" />
+	</c:forEach>
+	 
+    </body>
+</html>

@@ -1,0 +1,14 @@
+package com.excilys.dto;
+
+import java.time.LocalDate;
+
+import com.excilys.model.Company;
+
+public class ComputerDTO {
+	private String id;
+	private String name;
+	private String company;
+	private String dateEntree;
+	private String dateSortie;
+
+}

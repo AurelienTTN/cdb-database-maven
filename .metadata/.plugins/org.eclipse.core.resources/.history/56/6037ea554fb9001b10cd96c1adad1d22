@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Test des expressions EL</title>
+    </head>
+    <body>
+    <p>
+       <p>Ceci est une page générée depuis une JSP.</p>
+        <p>
+            ${test}
+            ${param.auteur}
+        </p>
+        <p>
+            Récupération du bean :
+            ${coyote.prenom}
+            ${coyote.nom}
+        </p>
+    </p>
+    </body>
+</html>
