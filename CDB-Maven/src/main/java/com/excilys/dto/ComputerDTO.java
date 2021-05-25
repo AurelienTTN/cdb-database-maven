@@ -46,5 +46,10 @@ public class ComputerDTO {
 	public void setDateSortie(String dateSortie) {
 		this.dateSortie = dateSortie;
 	}
+	
+	@Override
+	public String toString() {
+		return this.name + " " + this.company+" "+this.dateEntree+" "+this.dateSortie;
+	}
 
 }

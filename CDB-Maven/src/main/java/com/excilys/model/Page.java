@@ -3,40 +3,42 @@ package com.excilys.model;
 
 public class Page {
 	
-	private final int NB_LIGNE=20;
-	private int nb_element;
-	private int numero_page;
+	private int nbLigne = 10 ;
+	private int nbElementTotal;
+	private int numeroPage = 1;
+	
+	public Page() {
+		
+	}
+	
+
+	public int getNbLigne() {
+		return nbLigne;
+	}
+
+	public void setNbLigne(int nbLigne) {
+		this.nbLigne = nbLigne;
+	}
+
+	public int getNbElementTotal() {
+		return nbElementTotal;
+	}
+
+	public void setNbElementTotal(int nbElementTotal) {
+		this.nbElementTotal = nbElementTotal;
+	}
+
+	public int getNumeroPage() {
+		return numeroPage;
+	}
+
+	public void setNumeroPage(int numeroPage) {
+		this.numeroPage = numeroPage;
+	}
 	
 	 
 	
-	 public Page(int nb_element) {
-		   this.nb_element = nb_element;
-		   this.numero_page = 1;
-	 }
-
-	public void getPagePrecedente() {
-		this.numero_page--;
-	}
 	
-	public void getPageSuivante() {
-		this.numero_page++;
-	}
-	
-	public void setNumPage(int num) {
-		this.numero_page=num;
-	}
-	
-	public int getNumeroPage() {
-		return this.numero_page;
-	}
-	
-	public int getMaxElement() {
-		return this.nb_element;
-	}
-	
-	public int getNBElementParPage() {
-		return NB_LIGNE;
-	}
 	
 	
 	

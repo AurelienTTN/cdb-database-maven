@@ -80,6 +80,8 @@ public class Mapper {
 		String id = computerDTO.getCompany();
 		Computer computer = new Computer();
 		
+		System.out.println("IDDDDD "+id);
+		
 		if(!name.isBlank()) {
 			computer.setName(name);
 		}else {
@@ -87,24 +89,33 @@ public class Mapper {
 		}
 		
 		try {
-			computer.setDateEntree(LocalDate.parse(date_entry));
+			if(date_entry!=null)
+				computer.setDateEntree(LocalDate.parse(date_entry));
+			else
+				computer.setDateEntree(null);
 		}
 		catch(Exception e) {
-			
 		}
-		
+
 		try {
-			computer.setDateEntree(LocalDate.parse(date_out));
+			if(date_out!=null)
+				computer.setDateSortie(LocalDate.parse(date_out));
+			else
+				computer.setDateSortie(null);
 		}
 		catch(Exception e) {
 		}
 		
 		if(!id.isBlank()) {
-			System.out.println(id);
-			computer.setCompany(Dao.getInstance().getCompanyById(Integer.parseInt(id)));
-		}else {
-			return null;
+			int id_comp = Integer.parseInt(id);
+			if((id_comp>0)&&(id_comp<44))
+				computer.setCompany(Dao.getInstance().getCompanyById(id_comp));
+			else {
+				computer.setCompany(null);
+			}
 		}
+	
+		
 		return computer;	
 	}
 		

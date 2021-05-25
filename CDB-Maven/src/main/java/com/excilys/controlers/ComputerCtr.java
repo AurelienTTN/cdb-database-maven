@@ -64,6 +64,7 @@ public class ComputerCtr {
 		String out = choixUtilisateur.choixDateSortie();
 		String id_company = choixUtilisateur.choixIDCompany();
 		ComputerDTO computerDTO = new ComputerDTO(name,entree,out,id_company);
+		System.out.println(computerDTO);
 		this.service.ajouterComputer(computerDTO);
 	}
 	

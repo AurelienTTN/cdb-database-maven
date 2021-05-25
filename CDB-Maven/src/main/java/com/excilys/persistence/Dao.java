@@ -180,9 +180,23 @@ public class Dao {
 			PreparedStatement ps = this.con.prepareStatement(AJOUT_ONE_COMPUTER);
 			
 			ps.setString(1,name);
-			ps.setDate(2, Date.valueOf(date_entree_pc));
-			ps.setDate(3, Date.valueOf(date_sortie_pc));			
-			ps.setInt(4, company.getId());
+			
+			if(date_entree_pc!=null)
+				ps.setDate(2, Date.valueOf(date_entree_pc));
+			else
+				ps.setDate(2, null);
+			
+			
+			if(date_sortie_pc!=null)
+				ps.setDate(3, Date.valueOf(date_sortie_pc));
+			else
+				ps.setDate(3, null);
+			
+			if(company!=null)
+				ps.setString(4, company.getName());
+			else
+				ps.setString(4,null);
+			
 			ps.executeUpdate();
 			
 		}
