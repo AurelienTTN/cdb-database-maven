@@ -33,7 +33,7 @@ public final class Service {
 					
 			this.base = com.excilys.persistence.Dao.getInstance();
 			this.base.connection();  
-			this.mappy= new Mapper();
+			this.mappy= Mapper.getInstance();
 	    }
 
 	    public static Service getInstance() {

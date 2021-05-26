@@ -37,7 +37,7 @@ public class Dao {
 	
 	// Constructor
 	private Dao() {
-		this.mappy=new Mapper();
+		this.mappy= Mapper.getInstance();
 		
 	}
 	
@@ -193,9 +193,9 @@ public class Dao {
 				ps.setDate(3, null);
 			
 			if(company!=null)
-				ps.setString(4, company.getName());
+				ps.setInt(4, company.getId());
 			else
-				ps.setString(4,null);
+				ps.setInt(4,0);
 			
 			ps.executeUpdate();
 			

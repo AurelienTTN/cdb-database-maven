@@ -1,0 +1,3 @@
+$(document).submit(function(event) {
+    var introduced = $("#introduced").val();
+    var discontinued = $("#discontinued).val();

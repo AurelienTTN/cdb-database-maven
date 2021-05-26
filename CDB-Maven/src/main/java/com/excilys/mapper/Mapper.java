@@ -17,10 +17,19 @@ import com.excilys.service.Service;
 public class Mapper {
 	
 	private static Logger logger = LoggerFactory.getLogger("Mapper");
+	private static Mapper instance;
 	
 	public Mapper() {
 		
 	}
+	
+	public static Mapper getInstance() {
+        if (instance == null) {
+            instance = new Mapper();
+        }
+        return instance;
+    }
+
 	
 	public List<Computer> dataToListComputer(ResultSet data) throws SQLException{
 		
@@ -80,8 +89,6 @@ public class Mapper {
 		String id = computerDTO.getCompany();
 		Computer computer = new Computer();
 		
-		System.out.println("IDDDDD "+id);
-		
 		if(!name.isBlank()) {
 			computer.setName(name);
 		}else {
@@ -97,6 +104,7 @@ public class Mapper {
 		catch(Exception e) {
 		}
 
+		
 		try {
 			if(date_out!=null)
 				computer.setDateSortie(LocalDate.parse(date_out));
@@ -105,6 +113,13 @@ public class Mapper {
 		}
 		catch(Exception e) {
 		}
+		
+		
+		if((computer.getDateEntree()!=null) && (computer.getDateSortie()!=null)) {
+			if(computer.getDateSortie().isBefore(computer.getDateEntree()))
+				return null;
+		}
+		
 		
 		if(!id.isBlank()) {
 			int id_comp = Integer.parseInt(id);

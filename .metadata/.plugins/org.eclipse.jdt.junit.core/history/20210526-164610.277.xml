@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MapperTest" project="CDB-Maven" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.excilys.mapperTest.MapperTest" time="0.143">
+    <testcase name="testCreateComputer" classname="com.excilys.mapperTest.MapperTest" time="0.143"/>
+  </testsuite>
+</testrun>

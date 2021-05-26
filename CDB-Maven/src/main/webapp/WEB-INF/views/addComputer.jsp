@@ -14,7 +14,7 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="dashboard.html"> Application - Computer Database </a>
+            <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
         </div>
     </header>
 
@@ -27,7 +27,7 @@
                         <fieldset>
                             <div class="form-group">
                                 <label for="computerName">Computer name</label>
-                                <input type="text" class="form-control" id="computerName" name="computerName" placeholder="Computer name">
+                                <input required="required" type="text" class="form-control" id="computerName" name="computerName" placeholder="Computer name">
                             </div>
                             <div class="form-group">
                                 <label for="introduced">Introduced date</label>
@@ -40,10 +40,17 @@
                             <div class="form-group">
                                 <label for="companyId">Company</label>
                                 <select class="form-control" id="companyId" name="companyId" >
-                                    <option value="0">--</option>
+                               
+                                <c:forEach items="${listeCompany}" var="company">
+                                    <option value="${company.id}">${company.name}</option>
+								</c:forEach>
+                               
                                 </select>
                             </div>                  
                         </fieldset>
+                        
+                        <span id=alerteDate style=display:none>Dates incorrectes</span>
+                        <span id=alerteName style=display:none>Veuillez rentrer un nom correct</span>
                         <div class="actions pull-right">
                             <input type="submit" value="Add" class="btn btn-primary">
                             or
@@ -54,5 +61,8 @@
             </div>
         </div>
     </section>
+    <script src="./js/jquery.min.js"></script>
+	<script src="./js/bootstrap.min.js"></script>
+    <script src="./js/verificationAddComputer.js"></script>
 </body>
 </html>

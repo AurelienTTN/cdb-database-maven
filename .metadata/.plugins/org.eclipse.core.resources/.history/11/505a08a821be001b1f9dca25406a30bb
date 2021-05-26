@@ -1,0 +1,10 @@
+$(document).submit(function(event) {
+    var introduced = $("#introduced").val();
+    var discontinued = $("#discontinued).val();
+    var date1 = new Date(introduced);
+    var date2 = new Date(discontinued);
+    if(date1<date2){
+    	document.write("date valide")
+    else
+    	document.write("date invaide");
+ }

@@ -51,11 +51,9 @@ public class DashboardServlet extends HttpServlet {
 	
 	private void choisirPage(String s) {
 		if(s.equals("0")) {
-			System.out.println("Boucle pour aller au debut");
 			this.page.setNumeroPage(1);
 		}
 		else {
-			System.out.println("Boucle pour aller à la fin");
 			int nbTotal = this.page.getNbElementTotal();
 			int nbParPage = this.page.getNbLigne();
 			this.page.setNumeroPage((nbTotal%nbParPage) == 0 ? nbTotal/nbParPage : nbTotal/nbParPage +1);

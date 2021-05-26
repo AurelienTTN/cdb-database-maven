@@ -1,0 +1,12 @@
+package com.excilys.mapperTest;
+
+import junit.framework.TestCase;
+
+public class MapperTest extends TestCase {
+	
+	@Test
+	public final void testComputerWithbadDates() {
+		failt("not yet implemented");
+	}
+
+}
