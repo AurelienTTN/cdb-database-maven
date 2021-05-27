@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CompanyDaoTest" project="CDB-Maven" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.excilys.daoTest.CompanyDaoTest" time="0.189" displayname="CompanyDaoTest" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.CompanyDaoTest]">
+    <testcase name="testListeCompagnie" classname="com.excilys.daoTest.CompanyDaoTest" time="0.134" displayname="testListeCompagnie()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.CompanyDaoTest]/[method:testListeCompagnie()]"/>
+    <testcase name="testGetCompanyByID" classname="com.excilys.daoTest.CompanyDaoTest" time="0.054" displayname="testGetCompanyByID()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.CompanyDaoTest]/[method:testGetCompanyByID()]"/>
+  </testsuite>
+</testrun>

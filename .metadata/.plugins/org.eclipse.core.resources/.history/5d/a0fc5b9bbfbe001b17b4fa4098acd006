@@ -1,0 +1,9 @@
+package com.excilys.beforeTest;
+
+public class CreationDateBase {
+	
+	
+	private static String url = "urlh2";
+	private static String login ="";
+	private static String name = "";
+}

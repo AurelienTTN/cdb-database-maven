@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ComputerDaoTest" project="CDB-Maven" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.excilys.daoTest.ComputerDaoTest" time="0.803" displayname="ComputerDaoTest" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]">
+    <testcase name="testRetourneNbtotalOrdinateur" classname="com.excilys.daoTest.ComputerDaoTest" time="0.487" displayname="testRetourneNbtotalOrdinateur()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testRetourneNbtotalOrdinateur()]"/>
+    <testcase name="testGetComputerByID" classname="com.excilys.daoTest.ComputerDaoTest" time="0.13" displayname="testGetComputerByID()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testGetComputerByID()]"/>
+    <testcase name="testListeComputer" classname="com.excilys.daoTest.ComputerDaoTest" time="0.181" displayname="testListeComputer()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testListeComputer()]"/>
+  </testsuite>
+</testrun>

@@ -13,6 +13,7 @@ import com.excilys.dto.ComputerDTO;
 import com.excilys.model.*;
 import com.excilys.persistence.Dao;
 import com.excilys.service.Service;
+import com.excilys.ui.CompanyCLI;
 
 public class Mapper {
 	
@@ -62,13 +63,16 @@ public class Mapper {
 		}
 		Computer computer = new Computer(id1,name,date,date2,company);
 		return computer;
-	}		
+	}	
+	
 	
 	public List<Company> dataToListCompany(ResultSet data) throws SQLException{
 		
 		List<Company> Companies = new ArrayList<Company>();
+		int i=0;
 		while(data.next()) {
 			Companies.add(dataToCompany(data));
+			
 		}
 		return Companies;	
 	}

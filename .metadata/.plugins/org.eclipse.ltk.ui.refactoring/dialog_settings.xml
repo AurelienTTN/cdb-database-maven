@@ -10,6 +10,6 @@
 		<item key="DIALOG_FONT_NAME" value="1|Ubuntu|11.0|0|GTK|1|"/>
 	</section>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
-		<item key="deleteSubPackages" value="false"/>
+		<item key="deleteSubPackages" value="true"/>
 	</section>
 </section>

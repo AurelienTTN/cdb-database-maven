@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MapperTest" project="CDB-Maven" tests="4" started="4" failures="1" errors="0" ignored="0">
+  <testsuite name="com.excilys.mapperTest.MapperTest" time="0.523">
+    <testcase name="warning" classname="junit.framework.TestSuite.1" time="0.002">
+      <failure>junit.framework.AssertionFailedError: Test method isn't public: testMapToComputerShouldReturnAnEmptyListOfComputers(com.excilys.mapperTest.MapperTest)
+	at junit.framework.Assert.fail(Assert.java:57)
+	at junit.framework.TestCase.fail(TestCase.java:223)
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:96)
+	at junit.framework.TestCase.runBare(TestCase.java:142)
+	at junit.framework.TestResult$1.protect(TestResult.java:122)
+	at junit.framework.TestResult.runProtected(TestResult.java:142)
+	at junit.framework.TestResult.run(TestResult.java:125)
+	at junit.framework.TestCase.run(TestCase.java:130)
+	at junit.framework.TestSuite.runTest(TestSuite.java:241)
+	at junit.framework.TestSuite.run(TestSuite.java:236)
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:125)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:541)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:768)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:464)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)
+
+</failure>
+    </testcase>
+    <testcase name="testCreateComputerfromDTO" classname="com.excilys.mapperTest.MapperTest" time="0.149"/>
+    <testcase name="testCreateFromResultSet" classname="com.excilys.mapperTest.MapperTest" time="0.329"/>
+    <testcase name="testCreatelisteFromresultSet" classname="com.excilys.mapperTest.MapperTest" time="0.043"/>
+  </testsuite>
+</testrun>

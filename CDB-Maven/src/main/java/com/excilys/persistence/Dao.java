@@ -17,6 +17,11 @@ public class Dao {
 	private String url = "jdbc:mysql://127.0.0.1:3306/computer-database-db";
 	private String name = "admincdb";
 	private String passwd = "qwerty1234";
+	
+	private String urlTest  = "jdbc:h2:mem:test-db";
+	private String nameTest = "sa";
+	private String passwordTest="";
+	
 	private Connection con = null;
 	private Mapper mappy;
 	private static Dao instance;
@@ -47,7 +52,10 @@ public class Dao {
         }
         return instance;
     }
-
+	
+	public Connection getConnection() {
+		return this.con;
+	}
 	
 	public void connection() {
 		
@@ -63,6 +71,23 @@ public class Dao {
 		}
 		     
 	}
+	
+	public void connectionForTest() {
+			
+			/* */
+			try {
+				 Class.forName("org.h2.Driver");
+			    this.con = DriverManager.getConnection( this.urlTest, this.nameTest, this.passwordTest );
+			  
+			} catch ( SQLException e ) {
+				logger.error("Connection à la base impossible",e);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			     
+		}
+	
+	
 	
 	public int getNombreTotalOrdinateur() {
 		String query = "SELECT COUNT(*) as numero FROM computer;";
@@ -153,13 +178,14 @@ public class Dao {
 	//renvoie un seul pc en fonction de son ID
 	
 	public Computer oneComputer(int id) {
-		String query = "SELECT * FROM computer WHERE id="+id+";";
+		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id WHERE computer.id="+id+";";
 		ResultSet results=null;
 		Computer computer = null;
 
 		try {
 			Statement stmt = this.con.createStatement();
 			results = stmt.executeQuery(query);
+			results.next();
 			computer = this.mappy.dataToComputer(results);
 		}
 		catch(Exception e) {
@@ -206,14 +232,12 @@ public class Dao {
 	}
 	
 	
-	// Mets à jour le champ spécifié par l'utilisateur
 	
 	public void updateComputer(int id, int colonne, Object value) {
 		
 		
 		switch(colonne) {
 		
-		// Si l'utilisateur veut changer le nom
 		case 2:{
 			try {
 				PreparedStatement ps = this.con.prepareStatement(UPDATE_COMPUTER_NAME);

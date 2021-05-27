@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ComputerDaoTest" project="CDB-Maven" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="com.excilys.daoTest.ComputerDaoTest" time="0.576" displayname="ComputerDaoTest" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]">
+    <testcase name="testListeSpecifiqueComputer" classname="com.excilys.daoTest.ComputerDaoTest" time="0.144" displayname="testListeSpecifiqueComputer()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testListeSpecifiqueComputer()]"/>
+    <testcase name="testRetourneNbtotalOrdinateur" classname="com.excilys.daoTest.ComputerDaoTest" time="0.097" displayname="testRetourneNbtotalOrdinateur()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testRetourneNbtotalOrdinateur()]"/>
+    <testcase name="testGetComputerByID" classname="com.excilys.daoTest.ComputerDaoTest" time="0.075" displayname="testGetComputerByID()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testGetComputerByID()]"/>
+    <testcase name="testDeleteComputer" classname="com.excilys.daoTest.ComputerDaoTest" time="0.097" displayname="testDeleteComputer()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testDeleteComputer()]"/>
+    <testcase name="testListeComputer" classname="com.excilys.daoTest.ComputerDaoTest" time="0.077" displayname="testListeComputer()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testListeComputer()]"/>
+    <testcase name="testAjouterComputer" classname="com.excilys.daoTest.ComputerDaoTest" time="0.08" displayname="testAjouterComputer()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testAjouterComputer()]"/>
+  </testsuite>
+</testrun>
