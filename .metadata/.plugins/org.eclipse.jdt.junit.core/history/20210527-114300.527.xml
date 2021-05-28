@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ComputerDaoTest" project="CDB-Maven" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="com.excilys.daoTest.ComputerDaoTest" time="0.177" displayname="ComputerDaoTest" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]">
-    <testcase name="testGetComputerByID" classname="com.excilys.daoTest.ComputerDaoTest" time="0.104" displayname="testGetComputerByID()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testGetComputerByID()]"/>
-    <testcase name="testListeCompagnie" classname="com.excilys.daoTest.ComputerDaoTest" time="0.072" displayname="testListeCompagnie()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.ComputerDaoTest]/[method:testListeCompagnie()]"/>
-  </testsuite>
-</testrun>

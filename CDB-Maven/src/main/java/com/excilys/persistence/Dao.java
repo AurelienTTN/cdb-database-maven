@@ -29,18 +29,17 @@ public class Dao {
 	
 	private static Logger logger = LoggerFactory.getLogger("Dao");
 	
-	// Query
+
 	private static final String AJOUT_ONE_COMPUTER = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES(?,?,?,?);";
 	private static final String UPDATE_COMPUTER_NAME = "UPDATE computer SET name=? WHERE id=?";
 	private static final String UPDATE_COMPUTER_INTRODUCED = "UPDATE computer SET introduced=? WHERE id=?";
 	private static final String UPDATE_COMPUTER_DISCONTINUED = "UPDATE computer SET discontinued=? WHERE id=?";
 	private static final String UPDATE_COMPUTER_COMPANY_ID = "UPDATE computer SET company_id=? WHERE id=?";
-	
 	private static final String DELETE_COMPUTER = "DELETE FROM computer WHERE id=?";
+	private static final String DELETE_COMPANY = "DELETE FROM company WHERE id=?";
+	
+	
 
-	
-	
-	// Constructor
 	private Dao() {
 		this.mappy= Mapper.getInstance();
 		
@@ -59,7 +58,6 @@ public class Dao {
 	
 	public void connection() {
 		
-		/* On essaye de se connecter à notre base de donnée grâce aux informations passées au construteur*/
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		    this.con = DriverManager.getConnection( this.url, this.name, this.passwd );
@@ -123,7 +121,6 @@ public class Dao {
 		return computers;
 	}
 	
-	//Renvoie la liste des PC
 	
 	public List <Computer> listeComputer() {
 		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id;";
@@ -139,8 +136,7 @@ public class Dao {
 			
 		return computers;
 	}
-	
-	//Renvoie la liste des compagnies
+
 	
 	public List<Company> listeCompanies() {
 		String query = "SELECT * FROM company;";
@@ -175,7 +171,6 @@ public class Dao {
 		return company;
 	}
 	
-	//renvoie un seul pc en fonction de son ID
 	
 	public Computer oneComputer(int id) {
 		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id WHERE computer.id="+id+";";
@@ -195,7 +190,6 @@ public class Dao {
 				
 	}
 	
-	//Ajoute un pc en fonction des données rentrées par l'utilisateur
 	public void ajouterUnComputer(Computer c) {
 		
 		String name = c.getName();
@@ -293,7 +287,7 @@ public class Dao {
 		}
 	}
 	
-	// efface un pc à l'ID correspondand
+	
 	public void deleteComputer(int id) {
 		
 		try {
@@ -306,6 +300,21 @@ public class Dao {
 		}
 		 
 	}
+	
+	public void deleteCompany(int id) {
+			
+			try {
+				PreparedStatement ps = this.con.prepareStatement(DELETE_COMPANY);
+				ps.setInt(1,id);
+				ps.executeUpdate();
+			}
+			catch(Exception e){
+				logger.error("Problème lié à la requête SQL",e);
+			}
+			 
+		}
+	
+	
 		
 			
 		

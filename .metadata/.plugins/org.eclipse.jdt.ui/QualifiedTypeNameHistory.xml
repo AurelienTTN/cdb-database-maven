@@ -9,12 +9,24 @@
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.excilys.service.Service"/>
-    <fullyQualifiedTypeName name="com.excilys.persistence.Dao"/>
     <fullyQualifiedTypeName name="com.excilys.model.Page"/>
-    <fullyQualifiedTypeName name="com.excilys.model.Company"/>
     <fullyQualifiedTypeName name="com.excilys.mapper.Mapper"/>
     <fullyQualifiedTypeName name="com.excilys.dto.ComputerDTO"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
+    <fullyQualifiedTypeName name="org.apache.ibatis.jdbc.ScriptRunner"/>
+    <fullyQualifiedTypeName name="java.io.Reader"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="com.sun.tools.javac.util.List"/>
     <fullyQualifiedTypeName name="com.excilys.model.Computer"/>
+    <fullyQualifiedTypeName name="com.excilys.persistence.Dao"/>
+    <fullyQualifiedTypeName name="org.junit.BeforeClass"/>
+    <fullyQualifiedTypeName name="com.excilys.ui.CompanyCLI"/>
+    <fullyQualifiedTypeName name="com.excilys.model.Company"/>
+    <fullyQualifiedTypeName name="java.sql.ResultSet"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
 </qualifiedTypeNameHistroy>

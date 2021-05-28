@@ -80,7 +80,7 @@ public final class Service {
 	public void ajouterComputer(ComputerDTO computerDTO) {
 		Computer pc = creerComputer(computerDTO);
 		if(pc==null) {
-			System.out.println("PC vide");
+			System.out.println("Votre PC ne respecte pas toutes les conditions nécessaires à sa création");
 		}
 		this.base.ajouterUnComputer(pc);
 	}

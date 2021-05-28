@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="MapperTest" project="CDB-Maven" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="com.excilys.mapperTest.MapperTest" time="0.479">
-    <testcase name="testCreateComputerfromDTO" classname="com.excilys.mapperTest.MapperTest" time="0.157"/>
-    <testcase name="testCreateFromResultSet" classname="com.excilys.mapperTest.MapperTest" time="0.322"/>
-  </testsuite>
-</testrun>

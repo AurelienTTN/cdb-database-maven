@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CompanyDaoTest" project="CDB-Maven" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.excilys.daoTest.CompanyDaoTest" time="0.108" displayname="CompanyDaoTest" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.CompanyDaoTest]">
-    <testcase name="test" classname="com.excilys.daoTest.CompanyDaoTest" time="0.108" displayname="test()" uniqueid="[engine:junit-jupiter]/[class:com.excilys.daoTest.CompanyDaoTest]/[method:test()]"/>
-  </testsuite>
-</testrun>

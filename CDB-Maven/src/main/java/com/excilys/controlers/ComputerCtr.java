@@ -103,9 +103,10 @@ public class ComputerCtr {
 	
 	public void afficherOrdinateurParPages() {
 		int max_ordinateur = this.service.getNombreTotalComputer();
-		Page page = new Page(max_ordinateur);
+		Page page = new Page();
+		page.setNbElementTotal(max_ordinateur);
 		int choix = 1;
-		List<Computer> computers= this.service.getElementPage(1,page.getNBElementParPage());
+		List<Computer> computers= this.service.getElementPage(0,page.getNbLigne());
 		this.computerCLI.afficherListeComputers(computers);
 		
 		while(choix!=0) {
@@ -113,23 +114,23 @@ public class ComputerCtr {
 			switch(choix) {
 			case 1 :{
 				if(page.getNumeroPage()!=1)
-					page.getPagePrecedente();
+					page.setNumeroPage(page.getNumeroPage()-1);
 					break;
 			}
 			case 2 :{
-				if(page.getNumeroPage()!=(page.getMaxElement()/page.getNBElementParPage()+1)) 
-					page.getPageSuivante();
+				if(page.getNumeroPage()!=(page.getNbElementTotal()/page.getNbLigne()+1)) 
+					page.setNumeroPage(page.getNumeroPage()+1);
 				break;
 			}
 			case 3 :{
 				int num = choixUtilisateur.choixPageSpecifique();
-				page.setNumPage(num);	
+				page.setNumeroPage(num);	
 				break;
 			}
 			}
 			if(choix!=0) {
-				int index_debut = page.getNumeroPage()*page.getNBElementParPage()-page.getNBElementParPage()-1;
-				computers= this.service.getElementPage(index_debut,page.getNBElementParPage());
+				int index_debut = page.getNumeroPage()*page.getNbLigne()-page.getNbLigne()-1;
+				computers= this.service.getElementPage(index_debut,page.getNbLigne());
 				this.computerCLI.afficherListeComputers(computers);
 			}
 	}
