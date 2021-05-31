@@ -1,0 +1,13 @@
+package com.excilys.exceptions;
+
+public class ExceptionIncohérenceDates extends ValidationException{
+
+	
+	public ExceptionIncohérenceDates() {
+		super();
+	}
+	
+	public ExceptionIncohérenceDates(String s) {
+		super();
+	}
+}

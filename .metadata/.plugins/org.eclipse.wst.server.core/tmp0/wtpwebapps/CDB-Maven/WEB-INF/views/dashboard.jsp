@@ -85,7 +85,8 @@
                             <input type="checkbox" name="cb" class="cb" value="0">
                         </td>
                         <td>
-                            <a href="editComputer.html" onclick="">${computer.name}</a>
+                            <a href="editComputer" onclick="">${computer.name}</a>
+                            
                         </td>
                         <td>${computer.dateEntree}</td>
                         <td>${computer.dateSortie}</td>

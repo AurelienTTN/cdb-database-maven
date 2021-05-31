@@ -1,0 +1,12 @@
+package com.excilys.exceptions;
+
+public class ValidationException extends Runtime {
+
+	public ValidationException() {
+		super();
+	}
+	
+	public ValidationException(String s) {
+		super(s);
+	}
+}

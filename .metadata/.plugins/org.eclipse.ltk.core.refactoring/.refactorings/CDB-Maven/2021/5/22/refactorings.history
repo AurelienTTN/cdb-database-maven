@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename compilation unit &apos;com.excilys.exceptions.ExceptionIncohérenceDates.java&apos; to &apos;ExceptionIncoherenceDates.java&apos;&#x0A;- Original project: &apos;CDB-Maven&apos;&#x0A;- Original element: &apos;com.excilys.exceptions.ExceptionIncohérenceDates.java&apos;&#x0A;- Renamed element: &apos;com.excilys.exceptions.ExceptionIncoherenceDates.java&apos;" description="Rename compilation unit &apos;ExceptionIncohérenceDates.java&apos;" flags="2" id="org.eclipse.jdt.ui.rename.compilationunit" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.excilys.exceptions{ExceptionIncohérenceDates.java" name="ExceptionIncoherenceDates.java" references="false" stamp="1622465231626" version="1.0"/>
+</session>

@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.excilys.exceptions.ExceptionListeComputerVide;
+import com.excilys.mapper.Mapper;
 import com.excilys.dto.ComputerDTO;
 import com.excilys.exceptions.ExceptionComputerVide;
 import com.excilys.model.Computer;
@@ -56,6 +57,7 @@ public class ComputerCtr {
 	catch(ExceptionComputerVide e) {
 		logger.info(e.toString());
 	}
+	
 	}
 	
 	public void ajouterUnOrdinateur() {
@@ -68,32 +70,39 @@ public class ComputerCtr {
 		this.service.ajouterComputer(computerDTO);
 	}
 	
-	public void majOrdinateur() {
+	public void majOrdinateur() throws ExceptionComputerVide {
 		int id = choixUtilisateur.choixOrdinateur();
+		Computer computer = service.getOneComputer(id);
 		
-		int colonne = choixUtilisateur.choixChampAChanger();
-		switch(colonne){
-			case 2:{
-				String name = choixUtilisateur.choixNom();
-				service.changerInfoComputer(id, colonne, name);
-				break;
-			}
-			case 3:{
-				LocalDate date_entry = choixUtilisateur.choixDateEntree();
-				service.changerInfoComputer(id, colonne, date_entry);
-				break;
-			}
-			case 4:{
-				LocalDate date_out = choixUtilisateur.choixDateSortie();
-				service.changerInfoComputer(id, colonne, date_out);
-				break;
-			}
-			case 5:{
-				int id_comp = choixUtilisateur.choixIDCompany();
-				service.changerInfoComputer(id, colonne, id_comp);
-				break;
-			}
-		}	
+		
+		
+		Mapper mappy = Mapper.getInstance();
+		ComputerDTO computerDTO = mappy.createComputerDTO(computer);
+		System.out.println(computer);
+		System.out.println(computerDTO);
+		
+		String name = choixUtilisateur.choixNom();
+		if(!name.isBlank()) 
+			computerDTO.setName(name);
+	
+		String date_entry = choixUtilisateur.choixDateEntree();
+		if(!date_entry.isBlank()) 
+			computerDTO.setDateEntree(date_entry);
+	
+		String date_out = choixUtilisateur.choixDateSortie();
+		if(!date_out.isBlank())	
+			computerDTO.setDateSortie(date_out);
+		
+		String id_comp = choixUtilisateur.choixIDCompany();
+		if(!id_comp.isBlank()) {
+			computerDTO.setCompany(id_comp);
+		}
+		
+		Computer computerMaj = mappy.createComputer(computerDTO);
+		service.majComputer(computerMaj);
+		
+		
+		
 	}
 	
 	public void effacerOrdinateur() {

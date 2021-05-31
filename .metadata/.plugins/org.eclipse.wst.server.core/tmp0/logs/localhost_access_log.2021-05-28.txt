@@ -46,3 +46,4 @@
 127.0.0.1 - - [28/May/2021:09:37:10 +0200] "GET /CDB-Maven/dashboard?num=-1 HTTP/1.1" 200 29830
 127.0.0.1 - - [28/May/2021:09:37:11 +0200] "GET /CDB-Maven/fonts/fontawesome-webfont.woff?v=4.2.0 HTTP/1.1" 404 729
 127.0.0.1 - - [28/May/2021:09:37:11 +0200] "GET /CDB-Maven/fonts/fontawesome-webfont.ttf?v=4.2.0 HTTP/1.1" 404 728
+127.0.0.1 - - [28/May/2021:13:40:46 +0200] "GET /favicon.ico HTTP/1.1" 404 692

@@ -79,14 +79,11 @@ public final class Service {
 	
 	public void ajouterComputer(ComputerDTO computerDTO) {
 		Computer pc = creerComputer(computerDTO);
-		if(pc==null) {
-			System.out.println("Votre PC ne respecte pas toutes les conditions nécessaires à sa création");
-		}
 		this.base.ajouterUnComputer(pc);
 	}
 	
-	public void changerInfoComputer(int id, int colonne, Object value) {
-		this.base.updateComputer(id, colonne, value);
+	public void majComputer(Computer computer) {
+		this.base.updateComputer(computer);
 	}
 	
 	public void effacerComputer(int id) {

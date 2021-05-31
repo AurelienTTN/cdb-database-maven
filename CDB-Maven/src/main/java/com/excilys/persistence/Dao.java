@@ -31,13 +31,10 @@ public class Dao {
 	
 
 	private static final String AJOUT_ONE_COMPUTER = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES(?,?,?,?);";
-	private static final String UPDATE_COMPUTER_NAME = "UPDATE computer SET name=? WHERE id=?";
-	private static final String UPDATE_COMPUTER_INTRODUCED = "UPDATE computer SET introduced=? WHERE id=?";
-	private static final String UPDATE_COMPUTER_DISCONTINUED = "UPDATE computer SET discontinued=? WHERE id=?";
-	private static final String UPDATE_COMPUTER_COMPANY_ID = "UPDATE computer SET company_id=? WHERE id=?";
+	private static final String UPDATE_COMPUTER = "UPDATE computer "
+			+ "SET name=?,introduced=?,discontinued=?,company_id=? WHERE id=?;";
 	private static final String DELETE_COMPUTER = "DELETE FROM computer WHERE id=?";
-	private static final String DELETE_COMPANY = "DELETE FROM company WHERE id=?";
-	
+
 	
 
 	private Dao() {
@@ -66,8 +63,7 @@ public class Dao {
 			logger.error("Connection à la base impossible",e);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-		}
-		     
+		}	     
 	}
 	
 	public void connectionForTest() {
@@ -80,7 +76,7 @@ public class Dao {
 			} catch ( SQLException e ) {
 				logger.error("Connection à la base impossible",e);
 			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
+				logger.error("Connexion impossible", e);
 			}
 			     
 		}
@@ -91,8 +87,8 @@ public class Dao {
 		String query = "SELECT COUNT(*) as numero FROM computer;";
 		ResultSet results = null;
 		int count=0;
-		try {
-			Statement stmt = this.con.createStatement();
+		try(Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			results.next();
 			count = results.getInt("numero");
@@ -110,8 +106,8 @@ public class Dao {
 		ResultSet results=null;
 		List<Computer> computers = new ArrayList<Computer>();
 		
-		try {
-			Statement stmt = this.con.createStatement();
+		try(Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			computers = this.mappy.dataToListComputer(results);
 		}catch(Exception e) {
@@ -126,8 +122,8 @@ public class Dao {
 		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id;";
 		ResultSet results=null;
 		List<Computer> computers = new ArrayList<Computer>();
-		try {
-			Statement stmt = this.con.createStatement();
+		try (Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			computers = this.mappy.dataToListComputer(results);
 		}catch(Exception e) {
@@ -143,8 +139,8 @@ public class Dao {
 		ResultSet results=null;
 		List<Company> companies = new ArrayList<Company>();
 		
-		try {
-			Statement stmt = this.con.createStatement();
+		try(Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			companies = this.mappy.dataToListCompany(results);
 		}catch(Exception e) {
@@ -159,7 +155,7 @@ public class Dao {
 		ResultSet results=null;
 		Company company=null;;
 		
-		try {
+		try(Connection con = DataJDBCConnection.getConnection()){
 			Statement stmt = this.con.createStatement();
 			results = stmt.executeQuery(query);
 			results.next();
@@ -177,8 +173,8 @@ public class Dao {
 		ResultSet results=null;
 		Computer computer = null;
 
-		try {
-			Statement stmt = this.con.createStatement();
+		try(Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			results.next();
 			computer = this.mappy.dataToComputer(results);
@@ -191,13 +187,12 @@ public class Dao {
 	}
 	
 	public void ajouterUnComputer(Computer c) {
-		
 		String name = c.getName();
 		LocalDate date_entree_pc = c.getDateEntree();
 		LocalDate date_sortie_pc=c.getDateSortie();
 		Company company = c.getCompany();
-		try {
-			PreparedStatement ps = this.con.prepareStatement(AJOUT_ONE_COMPUTER);
+		try(Connection con = DataJDBCConnection.getConnection()){
+			PreparedStatement ps = con.prepareStatement(AJOUT_ONE_COMPUTER);
 			
 			ps.setString(1,name);
 			
@@ -215,7 +210,7 @@ public class Dao {
 			if(company!=null)
 				ps.setInt(4, company.getId());
 			else
-				ps.setInt(4,0);
+				ps.setNull(4,Types.NULL);
 			
 			ps.executeUpdate();
 			
@@ -227,71 +222,49 @@ public class Dao {
 	
 	
 	
-	public void updateComputer(int id, int colonne, Object value) {
-		
-		
-		switch(colonne) {
-		
-		case 2:{
-			try {
-				PreparedStatement ps = this.con.prepareStatement(UPDATE_COMPUTER_NAME);
-				ps.setString(1, (String)value);
-				ps.setInt(2,id);
-				ps.executeUpdate();
-				
-			}
-			catch(Exception e){
-				logger.error("Problème lié à la requête SQL",e);
-			}
-			break;
+	public void updateComputer(Computer c) {
+		int id = c.getId();
+		String name = c.getName();
+		LocalDate date_entree_pc = c.getDateEntree();
+		LocalDate date_sortie_pc=c.getDateSortie();
+		Company company = c.getCompany();
+		try(Connection con = DataJDBCConnection.getConnection()){
+			PreparedStatement ps = con.prepareStatement(UPDATE_COMPUTER);
+			
+			ps.setString(1,name);
+			
+			if(date_entree_pc!=null)
+				ps.setDate(2, Date.valueOf(date_entree_pc));
+			else
+				ps.setDate(2, null);
+			
+			
+			if(date_sortie_pc!=null)
+				ps.setDate(3, Date.valueOf(date_sortie_pc));
+			else
+				ps.setDate(3, null);
+			
+			if(company!=null)
+				ps.setInt(4, company.getId());
+			else
+				ps.setNull(4,Types.NULL);
+			
+			ps.setInt(5,id) ;
+			
+			
+			ps.executeUpdate();
+			
 		}
-		case 3:{
-			try {
-				PreparedStatement ps = this.con.prepareStatement(UPDATE_COMPUTER_INTRODUCED);
-				ps.setDate(1, Date.valueOf((LocalDate)value));
-				ps.setInt(2,id);
-				ps.executeUpdate();
-				
-			}
-			catch(Exception e){
-				logger.error("Problème lié à la requête SQL",e);
-			}
-			break;
-		}
-		case 4:{
-			try {
-				PreparedStatement ps = this.con.prepareStatement(UPDATE_COMPUTER_DISCONTINUED);
-				ps.setDate(1, Date.valueOf((LocalDate)value));
-				ps.setInt(2,id);
-				ps.executeUpdate();
-				
-			}
-			catch(Exception e){
-				logger.error("Problème lié à la requête SQL",e);
-			}
-			break;
-		}
-		case 5:{
-			try {
-				PreparedStatement ps = this.con.prepareStatement(UPDATE_COMPUTER_COMPANY_ID);
-				ps.setInt(1, (Integer)value);
-				ps.setInt(2,id);
-				ps.executeUpdate();
-				
-			}
-			catch(Exception e){
-				logger.error("Problème lié à la requête SQL",e);
-			}
-			break;
-		}	
+		catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
 		}
 	}
 	
 	
 	public void deleteComputer(int id) {
 		
-		try {
-			PreparedStatement ps = this.con.prepareStatement(DELETE_COMPUTER);
+		try(Connection con = DataJDBCConnection.getConnection()){
+			PreparedStatement ps = con.prepareStatement(DELETE_COMPUTER);
 			ps.setInt(1,id);
 			ps.executeUpdate();
 		}
@@ -301,8 +274,9 @@ public class Dao {
 		 
 	}
 	
+	/*
 	public void deleteCompany(int id) {
-			
+		
 			try {
 				PreparedStatement ps = this.con.prepareStatement(DELETE_COMPANY);
 				ps.setInt(1,id);
@@ -313,7 +287,7 @@ public class Dao {
 			}
 			 
 		}
-	
+	*/
 	
 		
 			

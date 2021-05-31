@@ -1,0 +1,25 @@
+package com.excilys.validator;
+
+import com.excilys.controlers.CompanyCtr;
+import com.excilys.controlers.ComputerCtr;
+import com.excilys.ui.ChoixUtilisateur;
+import com.excilys.ui.MenuCLI;
+
+public class Validator {
+	
+	private static Validator instance;
+	
+	
+	private Validator() {
+		
+	}
+	
+	
+	public static Validator getInstance() {
+        if (instance == null) {
+            instance = new Validator();
+        }
+        return instance;
+	}
+
+}

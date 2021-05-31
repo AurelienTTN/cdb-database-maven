@@ -1,0 +1,71 @@
+package com.excilys.validator;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import com.excilys.persistence.Dao;
+
+public class Validator {
+	
+	private static Validator instance;
+	
+	
+	private Validator() {
+		
+	}
+	
+	
+	public static Validator getInstance() {
+        if (instance == null) {
+            instance = new Validator();
+        }
+        return instance;
+	}
+
+	
+	public void validaatorDTO (ComputerDTO computerDTO) {
+		
+		
+
+	
+	if(!name.isBlank()) {
+		
+	}else {
+		return null;
+	}
+	
+	try {
+		if(date_entry!=null)
+			computer.setDateEntree(LocalDate.parse(date_entry));
+		else
+			computer.setDateEntree(null);
+	}
+	catch(DateTimeParseException e) {
+	}
+
+	
+	try {
+		if(date_out!=null)
+			
+		else
+			computer.setDateSortie(null);
+	}
+	catch(DateTimeParseException e) {
+	}
+	
+	
+	if((computer.getDateEntree()!=null) && (computer.getDateSortie()!=null)) {
+		if(computer.getDateSortie().isBefore(computer.getDateEntree()))
+			return null;
+	}
+	
+	
+	if(!id.isBlank()) {
+		int id_comp = Integer.parseInt(id);
+		if((id_comp>0)&&(id_comp<44))
+			
+		else {
+			computer.setCompany(null);
+		}
+	}
+}

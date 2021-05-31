@@ -3,10 +3,19 @@ package com.excilys.dto;
 
 
 public class ComputerDTO {
+	private String id;
 	private String name;
 	private String company;
 	private String dateEntree;
 	private String dateSortie;
+	
+	public ComputerDTO(String id,String name,String dateEntree,String dateSortie,String company) {
+		this.id = id;
+		this.name=name;
+		this.company=company;
+		this.dateEntree=dateEntree;
+		this.dateSortie=dateSortie;
+	}
 	
 	public ComputerDTO(String name,String dateEntree,String dateSortie,String company) {
 		this.name=name;
@@ -14,7 +23,14 @@ public class ComputerDTO {
 		this.dateEntree=dateEntree;
 		this.dateSortie=dateSortie;
 	}
+	
+	public String getId() {
+		return id;
+	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -49,7 +65,7 @@ public class ComputerDTO {
 	
 	@Override
 	public String toString() {
-		return this.name + " " + this.company+" "+this.dateEntree+" "+this.dateSortie;
+		return this.id + " " + this.name + " " + this.company+" "+this.dateEntree+" "+this.dateSortie;
 	}
 
 }

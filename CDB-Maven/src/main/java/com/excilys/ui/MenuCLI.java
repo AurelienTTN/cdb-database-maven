@@ -3,6 +3,7 @@ package com.excilys.ui;
 
 import com.excilys.controlers.CompanyCtr;
 import com.excilys.controlers.ComputerCtr;
+import com.excilys.exceptions.ExceptionComputerVide;
 
 public class MenuCLI {
 	
@@ -38,7 +39,7 @@ public class MenuCLI {
 		System.out.println("Faites votre choix :");
 	}
 	
-	public void useMenu(){
+	public void useMenu() throws ExceptionComputerVide{
 		
 		this.afficherMenu();
 		int choix = choixUtilisateur.choixMenu();
