@@ -15,7 +15,7 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="dashboard"> Application - Computer Database </a>
+            <a class="navbar-brand" href="dashboard?new=1"> Application - Computer Database </a>
         </div>
     </header>
 
@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <form id="deleteForm" action="#" method="POST">
+        <form id="deleteForm" action="dashboard" method="POST">
             <input type="hidden" name="selection" value="">
         </form>
 
@@ -52,26 +52,29 @@
                         <!-- Table header for Computer Name -->
 
                         <th class="editMode" style="width: 60px; height: 22px;">
-                            <input type="checkbox" id="selectall" /> 
+                            <input type="checkbox" id="selectall" name="selectall"/> 
                             <span style="vertical-align: top;">
                                  -  <a href="#" id="deleteSelected" onclick="$.fn.deleteSelected();">
                                         <i class="fa fa-trash-o fa-lg"></i>
                                     </a>
                             </span>
                         </th>
+                        
                         <th>
-                            Computer name
+                             <a href="dashboard?orderBy=name" onclick="">Computer Name</a>
                         </th>
                         <th>
-                            Introduced date
+                        	<a href="dashboard?orderBy=introduced" onclick=""> Introduced date</a>
+                           
                         </th>
                         <!-- Table header for Discontinued Date -->
                         <th>
-                            Discontinued date
+                        	<a href="dashboard?orderBy=discontinued" onclick=""> Discontinued date</a>
+                            
                         </th>
                         <!-- Table header for Company -->
                         <th>
-                            Company
+                        	<a href="dashboard?orderBy=company" onclick=""> Company</a>
                         </th>
 
                     </tr>
@@ -82,10 +85,10 @@
                 	<c:forEach items="${listeComputer}" var="computer">
                     <tr>
                         <td class="editMode">
-                            <input type="checkbox" name="cb" class="cb" value="0">
+                            <input type="checkbox" name="cb" class="cb" value="${computer.id}">
                         </td>
                         <td>
-                            <a href="editComputer" onclick="">${computer.name}</a>
+                            <a href="editComputer?computerID=${computer.id}" onclick="">${computer.name}</a>
                             
                         </td>
                         <td>${computer.dateEntree}</td>

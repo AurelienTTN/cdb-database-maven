@@ -33,6 +33,10 @@ public class Dao {
 	private static final String AJOUT_ONE_COMPUTER = "INSERT INTO computer (name,introduced,discontinued,company_id) VALUES(?,?,?,?);";
 	private static final String UPDATE_COMPUTER = "UPDATE computer "
 			+ "SET name=?,introduced=?,discontinued=?,company_id=? WHERE id=?;";
+	private static final String SEARCH_COMPUTER_BY_NAME = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id "
+			+ "WHERE computer.name LIKE ? OR company.name LIKE ? LIMIT ?,? ;";
+	private static final String SEARCH_BY_NAME_FOR_COUNT = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id "
+			+ "WHERE computer.name LIKE ? OR company.name LIKE ? ;";
 	private static final String DELETE_COMPUTER = "DELETE FROM computer WHERE id=?";
 
 	
@@ -273,6 +277,107 @@ public class Dao {
 		}
 		 
 	}
+
+	public List<Computer> getListeComputerByName(String nameC,int indexDeb,int nombreElement) {
+		
+		
+		ResultSet results=null;
+		List<Computer> computers = new ArrayList<Computer>();
+		
+		try (Connection con = DataJDBCConnection.getConnection()){
+			PreparedStatement ps = con.prepareStatement(SEARCH_COMPUTER_BY_NAME);
+			ps.setString(1,"%"+nameC+"%");
+			ps.setString(2,"%"+nameC+"%");
+			ps.setInt(3,indexDeb);
+			ps.setInt(4, nombreElement);
+			
+			results = ps.executeQuery();
+			computers = this.mappy.dataToListComputer(results);
+		}catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
+		}
+			
+		return computers;
+	}
+
+	public int getNbElementListeSearch(String nameC) {
+		
+		ResultSet results=null;
+		List<Computer> computers = new ArrayList<Computer>();
+		
+		try (Connection con = DataJDBCConnection.getConnection()){
+			PreparedStatement ps = con.prepareStatement(SEARCH_BY_NAME_FOR_COUNT);
+			ps.setString(1,"%"+nameC+"%");
+			ps.setString(2,"%"+nameC+"%");
+			results = ps.executeQuery();
+			computers = this.mappy.dataToListComputer(results);
+		}catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
+		}
+			
+		return computers.size();
+	}
+
+	public List<Computer> getListeComputerOrderedByName(int deb, int nbElement) {
+		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY computer.name LIMIT "+deb+","+nbElement+";";
+		ResultSet results=null;
+		List<Computer> computers = new ArrayList<Computer>();
+		try (Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
+			results = stmt.executeQuery(query);
+			computers = this.mappy.dataToListComputer(results);
+		}catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
+		}
+			
+		return computers;
+	}
+
+	public List<Computer> getListeComputerOrderedByIntroduced(int deb, int nbElement) {
+		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY computer.introduced DESC LIMIT "+deb+","+nbElement+";";
+		ResultSet results=null;
+		List<Computer> computers = new ArrayList<Computer>();
+		try (Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
+			results = stmt.executeQuery(query);
+			computers = this.mappy.dataToListComputer(results);
+		}catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
+		}
+			
+		return computers;
+	}
+	
+	public List<Computer> getListeComputerOrderedByDiscontinued(int deb, int nbElement) {
+		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY computer.discontinued DESC LIMIT "+deb+","+nbElement+";";
+		ResultSet results=null;
+		List<Computer> computers = new ArrayList<Computer>();
+		try (Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
+			results = stmt.executeQuery(query);
+			computers = this.mappy.dataToListComputer(results);
+		}catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
+		}
+			
+		return computers;
+	}
+	
+	public List<Computer> getListeComputerOrderedByCompany(int deb, int nbElement) {
+		String query = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY company.name LIMIT "+deb+","+nbElement+";";
+		ResultSet results=null;
+		List<Computer> computers = new ArrayList<Computer>();
+		try (Connection con = DataJDBCConnection.getConnection()){
+			Statement stmt = con.createStatement();
+			results = stmt.executeQuery(query);
+			computers = this.mappy.dataToListComputer(results);
+		}catch(Exception e) {
+			logger.error("Problème lié à la requête SQL",e);
+		}
+			
+		return computers;
+	}
+		
 	
 	/*
 	public void deleteCompany(int id) {

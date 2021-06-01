@@ -71,11 +71,9 @@ public class ComputerCtr {
 	}
 	
 	public void majOrdinateur() throws ExceptionComputerVide {
+		
 		int id = choixUtilisateur.choixOrdinateur();
 		Computer computer = service.getOneComputer(id);
-		
-		
-		
 		Mapper mappy = Mapper.getInstance();
 		ComputerDTO computerDTO = mappy.createComputerDTO(computer);
 		System.out.println(computer);

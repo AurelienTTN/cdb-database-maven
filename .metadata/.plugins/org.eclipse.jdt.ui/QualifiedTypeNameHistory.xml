@@ -11,8 +11,6 @@
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="com.excilys.service.Service"/>
     <fullyQualifiedTypeName name="com.excilys.model.Page"/>
-    <fullyQualifiedTypeName name="com.excilys.mapper.Mapper"/>
-    <fullyQualifiedTypeName name="com.excilys.dto.ComputerDTO"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.jdbc.ScriptRunner"/>
     <fullyQualifiedTypeName name="java.io.Reader"/>
@@ -25,8 +23,21 @@
     <fullyQualifiedTypeName name="com.excilys.ui.CompanyCLI"/>
     <fullyQualifiedTypeName name="com.excilys.model.Company"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
-    <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeAll"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.excilys.mapper.Mapper"/>
+    <fullyQualifiedTypeName name="java.lang.Integer"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeParseException"/>
+    <fullyQualifiedTypeName name="com.excilys.validator.Validator"/>
+    <fullyQualifiedTypeName name="com.excilys.dto.ComputerDTO"/>
+    <fullyQualifiedTypeName name="com.excilys.exceptions.NameComputerEmpty"/>
+    <fullyQualifiedTypeName name="com.excilys.exceptions.FormatDateException"/>
+    <fullyQualifiedTypeName name="com.excilys.exceptions.ExceptionIncoherenceDates"/>
+    <fullyQualifiedTypeName name="com.excilys.exceptions.ValidationException"/>
+    <fullyQualifiedTypeName name="com.zaxxer.hikari.HikariDataSource"/>
+    <fullyQualifiedTypeName name="com.zaxxer.hikari.HikariConfig"/>
+    <fullyQualifiedTypeName name="java.sql.Connection"/>
+    <fullyQualifiedTypeName name="java.sql.SQLException"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 </qualifiedTypeNameHistroy>

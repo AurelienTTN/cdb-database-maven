@@ -89,6 +89,32 @@ public final class Service {
 	public void effacerComputer(int id) {
 		this.base.deleteComputer(id);
 	}
+
+	public List<Computer> getListeComputerByName(String name,int index_deb,int nombre_max) {
+		return this.base.getListeComputerByName(name,index_deb,nombre_max);
+
+	}
+
+	public int getNbElementListeSearch(String name) {
+		return this.base.getNbElementListeSearch(name);
+	}
+
+	public List<Computer> getListeComputerOrderedByName(int deb, int nbElement) {
+		return this.base.getListeComputerOrderedByName(deb,nbElement);
+		
+	}
+
+	public List<Computer> getListeComputerOrderedByIntroduced(int deb, int nbElement) {
+		return this.base.getListeComputerOrderedByIntroduced(deb,nbElement);
+	}
+	
+	public List<Computer> getListeComputerOrderedByDiscontinued(int deb, int nbElement) {
+		return this.base.getListeComputerOrderedByDiscontinued(deb,nbElement);
+	}
+	
+	public List<Computer> getListeComputerOrderedByCompany(int deb, int nbElement) {
+		return this.base.getListeComputerOrderedByCompany(deb,nbElement);
+	}
 	
 	
 	
