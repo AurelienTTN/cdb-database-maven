@@ -121,6 +121,7 @@ public class Mapper {
 		}
 		catch(ValidationException e) {
 			logger.error("Impossible de créer un pc : " + e.toString());
+			System.exit(0);
 		}
 		
 		Computer computer = new Computer();
