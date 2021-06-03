@@ -2,6 +2,7 @@ package com.excilys.controlers;
 
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -25,12 +26,14 @@ public class ComputerCtr {
 	private ComputerCLI computerCLI;
 	private ChoixUtilisateur choixUtilisateur;
 	private static Logger logger = LoggerFactory.getLogger("ComputerCtr");
+	private Mapper mappy;
 
 	
 	private ComputerCtr() {
 		this.service = Service.getInstance();
 		this.computerCLI = ComputerCLI.getInstance();
 		this.choixUtilisateur = ChoixUtilisateur.getInstance();
+		this.mappy = Mapper.getInstance();
 		
 	}
 	
@@ -43,7 +46,10 @@ public class ComputerCtr {
 	
 	public void afficherListeComputers(){
 			List<Computer> computers= this.service.getListComputer();
-			this.computerCLI.afficherListeComputers(computers);
+			List<ComputerDTO> computersDTO = new ArrayList<>();
+			for(Computer c: computers)
+				computersDTO.add(this.mappy.createComputerDTO(c));
+			this.computerCLI.afficherListeComputers(computersDTO);
 	}
 		
 	
@@ -52,7 +58,8 @@ public class ComputerCtr {
 		int id = choixUtilisateur.choixOrdinateur();
 	try {
 		Computer computer = this.service.getOneComputer(id);
-		this.computerCLI.afficherComputer(computer);
+		ComputerDTO computerDTO = this.mappy.createComputerDTO(computer);
+		this.computerCLI.afficherComputer(computerDTO);
 	}
 	catch(ExceptionComputerVide e) {
 		logger.info(e.toString());
@@ -114,7 +121,12 @@ public class ComputerCtr {
 		page.setNbElementTotal(max_ordinateur);
 		int choix = 1;
 		List<Computer> computers= this.service.getElementPage(0,page.getNbLigne());
-		this.computerCLI.afficherListeComputers(computers);
+		
+		List<ComputerDTO> computersDTO = new ArrayList<>();
+		for(Computer c: computers)
+			computersDTO.add(this.mappy.createComputerDTO(c));
+		
+		this.computerCLI.afficherListeComputers(computersDTO);
 		
 		while(choix!=0) {
 			choix = choixUtilisateur.choixMenuPage();
@@ -138,9 +150,18 @@ public class ComputerCtr {
 			if(choix!=0) {
 				int index_debut = page.getNumeroPage()*page.getNbLigne()-page.getNbLigne()-1;
 				computers= this.service.getElementPage(index_debut,page.getNbLigne());
-				this.computerCLI.afficherListeComputers(computers);
+				List<ComputerDTO> computersD = new ArrayList<>();
+				for(Computer c: computers)
+					computersD.add(this.mappy.createComputerDTO(c));
+				this.computerCLI.afficherListeComputers(computersD);
 			}
 	}
+	}
+
+	public void deleteCompagnie() {
+		int num = choixUtilisateur.choixCompagnie();
+		service.deleteCompanyById(num);
+		
 	}
 }
 	

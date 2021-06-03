@@ -1,6 +1,0 @@
-$(document).submit(function(event) {
-    var introduced = $("#introduced").val();
-    var discontinued = $("#discontinued).val();
-    var date1 = new Date(introduced);
-    var date2 = new Date(discontinued);
- }

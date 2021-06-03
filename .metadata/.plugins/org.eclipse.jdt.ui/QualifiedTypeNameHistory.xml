@@ -30,7 +30,6 @@
     <fullyQualifiedTypeName name="java.lang.Integer"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeParseException"/>
     <fullyQualifiedTypeName name="com.excilys.validator.Validator"/>
-    <fullyQualifiedTypeName name="com.excilys.dto.ComputerDTO"/>
     <fullyQualifiedTypeName name="com.excilys.exceptions.NameComputerEmpty"/>
     <fullyQualifiedTypeName name="com.excilys.exceptions.FormatDateException"/>
     <fullyQualifiedTypeName name="com.excilys.exceptions.ExceptionIncoherenceDates"/>
@@ -40,4 +39,8 @@
     <fullyQualifiedTypeName name="java.sql.Connection"/>
     <fullyQualifiedTypeName name="java.sql.SQLException"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+    <fullyQualifiedTypeName name="com.excilys.dto.ComputerDTO"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

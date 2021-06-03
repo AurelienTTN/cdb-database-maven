@@ -38,39 +38,47 @@ public class Validator {
 			
 		String date_entry = computerDTO.getDateEntree();
 		
-		if(!date_entry.isBlank()) {
-			try {
-				LocalDate test = LocalDate.parse(date_entry);
-			}
-			catch(DateTimeParseException e) {
-				throw new FormatDateException("La Date d'entrée a un format invalide");
+		if(date_entry!=null) {
+			if(!date_entry.isBlank()) {
+				try {
+					LocalDate test = LocalDate.parse(date_entry);
+				}
+				catch(DateTimeParseException e) {
+					throw new FormatDateException("La Date d'entrée a un format invalide");
+				}
 			}
 		}
 		
-		String date_out = computerDTO.getDateSortie();
 		
-		if(!date_out.isBlank()) {
-			try {
-				LocalDate test = LocalDate.parse(date_out);
-			}
-			catch(DateTimeParseException e) {
-				throw new FormatDateException("La Date de sortie a un format invalide");
+		String date_out = computerDTO.getDateSortie();
+		if(date_out!=null) {
+			if(!date_out.isBlank()) {
+				try {
+					LocalDate test = LocalDate.parse(date_out);
+				}
+				catch(DateTimeParseException e) {
+					throw new FormatDateException("La Date de sortie a un format invalide");
+				}
 			}
 		}
 		
 	
-		if((!date_entry.isBlank()) && (!date_out.isBlank())) {
-			if(LocalDate.parse(date_out).isBefore(LocalDate.parse(date_entry)))
-				throw new ExceptionIncoherenceDates("La date de sortie est avant la date d'entrée");
+		if((date_entry!=null)&&(date_out!=null)) {
+			if((!date_entry.isBlank()) && (!date_out.isBlank())) {
+				if(LocalDate.parse(date_out).isBefore(LocalDate.parse(date_entry)))
+					throw new ExceptionIncoherenceDates("La date de sortie est avant la date d'entrée");
+			}
 		}
 		
 		
 		String id = computerDTO.getCompany();
 		
-		if(!id.isBlank()) {
-			int id_comp = Integer.parseInt(id);
-			if(Dao.getInstance().getCompanyById(id_comp)==null) {
-				throw new IDCompanyInexistant("L'id"+ id_comp + "n'existe pas");
+		if(id!=null) {
+			if(!id.isBlank()) {
+				int id_comp = Integer.parseInt(id);
+				if(Dao.getInstance().getCompanyById(id_comp)==null) {
+					throw new IDCompanyInexistant("L'id"+ id_comp + "n'existe pas");
+				}
 			}
 		}
 	}

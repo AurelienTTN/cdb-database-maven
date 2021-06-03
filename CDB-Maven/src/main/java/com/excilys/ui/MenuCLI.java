@@ -36,6 +36,7 @@ public class MenuCLI {
 		System.out.println("Mettre à jour un certain ordinateur - 5 ");
 		System.out.println("Effacer un ordinateur - 6\n");
 		System.out.println("Affichage par pages des ordinateurs- 7\n");
+		System.out.println("Effacer une compagnie- 8\n");
 		System.out.println("Faites votre choix :");
 	}
 	
@@ -73,6 +74,11 @@ public class MenuCLI {
 			this.computerCtr.afficherOrdinateurParPages();
 			break;
 		}
+		case 8:{
+			this.computerCtr.deleteCompagnie();
+			break;
+		}
+		
 		}
 		
 	}

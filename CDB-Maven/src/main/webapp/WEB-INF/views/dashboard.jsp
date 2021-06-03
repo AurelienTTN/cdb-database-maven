@@ -74,7 +74,7 @@
                         </th>
                         <!-- Table header for Company -->
                         <th>
-                        	<a href="dashboard?orderBy=company" onclick=""> Company</a>
+                        	<a href="dashboard?orderBy=company_id" onclick=""> Company</a>
                         </th>
 
                     </tr>

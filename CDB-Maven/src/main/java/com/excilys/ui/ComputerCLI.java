@@ -2,6 +2,7 @@ package com.excilys.ui;
 
 import java.util.List;
 
+import com.excilys.dto.ComputerDTO;
 import com.excilys.model.Computer;
 
 public class ComputerCLI {
@@ -19,12 +20,12 @@ public class ComputerCLI {
         }
         return instance;
     }
-	public void afficherComputer(Computer computer) {
+	public void afficherComputer(ComputerDTO computer) {
 		System.out.println(computer);
 	}
 	
-	public void afficherListeComputers(List<Computer> computers) {
-		for(Computer c : computers) {
+	public void afficherListeComputers(List<ComputerDTO> computers) {
+		for(ComputerDTO c : computers) {
 			this.afficherComputer(c);
 		}
 	}

@@ -41,6 +41,6 @@ public class AddComputerServlet extends HttpServlet{
 	        ComputerDTO computerDTO = new ComputerDTO(name,date_entree,date_sortie,companyId);
 	        Service service = Service.getInstance();
 	        service.ajouterComputer(computerDTO);
-	        response.sendRedirect("dashboard");
+	        response.sendRedirect("dashboard?new=1");
 	    }
 }

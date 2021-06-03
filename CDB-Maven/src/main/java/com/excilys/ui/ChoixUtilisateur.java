@@ -73,6 +73,12 @@ public class ChoixUtilisateur {
 		Scanner choix = new Scanner(System.in);
 		return choix.nextInt();
 	}
+
+	public int choixCompagnie() {
+		System.out.println("Veuillez entrer l'ID d'une compagnie à supprimer");
+		Scanner choix = new Scanner(System.in);
+		return choix.nextInt();
+	}
 	
 	
 	

@@ -131,17 +131,17 @@ public class Mapper {
 		
 		computer.setName(computerDTO.getName());
 		
-		if(!computerDTO.getDateEntree().isBlank())
+		if((computerDTO.getDateEntree()!=null)&&(!computerDTO.getDateEntree().isBlank()))
 			computer.setDateEntree(LocalDate.parse(computerDTO.getDateEntree()));
 		else 
 			computer.setDateEntree(null);
 		
-		if(!computerDTO.getDateSortie().isBlank())
+		if((computerDTO.getDateSortie()!=null)&&(!computerDTO.getDateSortie().isBlank()))
 			computer.setDateSortie(LocalDate.parse(computerDTO.getDateSortie()));
 		else 
 			computer.setDateSortie(null);
 		
-		if(!computerDTO.getCompany().isBlank())
+		if((computerDTO.getCompany()!=null)&&(!computerDTO.getCompany().isBlank()))
 			computer.setCompany(Dao.getInstance().getCompanyById(Integer.parseInt(computerDTO.getCompany())));
 		else
 			computer.setCompany(null);

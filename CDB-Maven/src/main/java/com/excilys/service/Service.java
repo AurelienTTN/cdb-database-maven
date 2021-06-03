@@ -115,6 +115,14 @@ public final class Service {
 	public List<Computer> getListeComputerOrderedByCompany(int deb, int nbElement) {
 		return this.base.getListeComputerOrderedByCompany(deb,nbElement);
 	}
+
+	public void deleteCompanyById(int id) {
+		this.base.deleteCompanyByID(id);
+	}
+	
+	public List<Computer> getListeOrdered(int deb,int index_fin,String orderBy,String search){
+		return this.base.getListComputerOrdered(deb, index_fin, orderBy, search);
+	}
 	
 	
 	
