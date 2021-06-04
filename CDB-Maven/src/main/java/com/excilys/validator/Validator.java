@@ -51,7 +51,6 @@ public class Validator {
 		
 		
 		String date_out = computerDTO.getDateSortie();
-		System.out.println(date_out);
 		if(date_out!=null) {
 			if(!date_out.isBlank()) {
 				try {
@@ -63,7 +62,6 @@ public class Validator {
 			}
 		}
 		
-		System.out.println(LocalDate.parse(date_out).isBefore(LocalDate.parse(date_entry)));
 		if((date_entry!=null)&&(date_out!=null)) {
 			if((!date_entry.isBlank()) && (!date_out.isBlank())) {
 				if(LocalDate.parse(date_out).isBefore(LocalDate.parse(date_entry)))

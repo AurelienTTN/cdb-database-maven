@@ -73,7 +73,6 @@ public class Mapper {
 	public List<Company> dataToListCompany(ResultSet data) throws SQLException{
 		
 		List<Company> Companies = new ArrayList<Company>();
-		int i=0;
 		while(data.next()) {
 			Companies.add(dataToCompany(data));
 			
