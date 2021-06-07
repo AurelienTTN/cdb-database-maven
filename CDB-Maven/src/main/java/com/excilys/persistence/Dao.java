@@ -3,15 +3,19 @@ package com.excilys.persistence;
 import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 import com.excilys.mapper.*;
 
+@Repository
 public class Dao {
 	// Properties
 	private String url = "jdbc:mysql://127.0.0.1:3306/computer-database-db";
@@ -23,8 +27,8 @@ public class Dao {
 	private String passwordTest="";
 	
 	private Connection con = null;
+	@Autowired
 	private Mapper mappy;
-	private static Dao instance;
 	
 	
 	private static Logger logger = LoggerFactory.getLogger("Dao");
@@ -43,16 +47,9 @@ public class Dao {
 	
 
 	private Dao() {
-		this.mappy= Mapper.getInstance();
 		
 	}
 	
-	public static Dao getInstance() {
-        if (instance == null) {
-            instance = new Dao();
-        }
-        return instance;
-    }
 	
 	public Connection getConnection() {
 		return this.con;
@@ -407,8 +404,9 @@ public class Dao {
 
 	public void deleteCompanyByID(int id) {
 		
-	
-		try (Connection con = DataJDBCConnection.getConnection()){
+		
+		try {
+			Connection con = DataJDBCConnection.getConnection();
 			PreparedStatement deleteComputer = con.prepareStatement(DELETE_COMPUTER_COMPANY_ID);
 			PreparedStatement deleteCompany = con.prepareStatement(DELETE_COMPANY);
 			

@@ -1,21 +1,16 @@
 package com.excilys.controlers;
 
+import org.springframework.stereotype.Controller;
 
+@Controller
 public class CLICtr {
 	
-	private static CLICtr instance;
 
 	
 	private CLICtr() {
 		
 	}
 	
-	public static CLICtr getInstance() {
-	       if (instance == null) {
-	            instance = new CLICtr();
-	        }
-	        return instance;
-	    }
 	
 	
 	

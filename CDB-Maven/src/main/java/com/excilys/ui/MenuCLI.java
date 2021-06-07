@@ -1,31 +1,25 @@
 package com.excilys.ui;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.excilys.controlers.CompanyCtr;
 import com.excilys.controlers.ComputerCtr;
 import com.excilys.exceptions.ExceptionComputerVide;
 
+@Component
 public class MenuCLI {
 	
 
-	private static MenuCLI instance;
+	@Autowired
 	private ComputerCtr computerCtr;
+	@Autowired
 	private CompanyCtr companyCtr;
+	@Autowired
 	private ChoixUtilisateur choixUtilisateur;
 	
-	private MenuCLI() {
-		this.computerCtr = ComputerCtr.getInstance();
-		this.companyCtr = CompanyCtr.getInstance();
-		this.choixUtilisateur = ChoixUtilisateur.getInstance();
-	}
 	
-	
-	public static MenuCLI getInstance() {
-        if (instance == null) {
-            instance = new MenuCLI();
-        }
-        return instance;
-	}
 
 	public void afficherMenu() {
 		System.out.println("Que voulez vous faire ? Tapez le numéro correspondant à votre requête \n");

@@ -2,8 +2,11 @@ package com.excilys.ui;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import com.excilys.model.Company;
 
+@Component
 public class CompanyCLI {
 	
 private static CompanyCLI instance;

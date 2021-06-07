@@ -15,7 +15,7 @@ import com.excilys.exceptions.ExceptionComputerVide;
 import com.excilys.mapper.Mapper;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 
 
 
@@ -32,7 +32,7 @@ public class EditComputerServlet extends  HttpServlet {
 		if(request.getParameter("computerID")!=null) {
 			request.setAttribute("idActualComputer",request.getParameter("computerID") );
 			idPCMaj = request.getParameter("computerID");
-			Service service = Service.getInstance();
+			ServiceS service = ServiceS.getInstance();
 			try {
 				computer = service.getOneComputer(Integer.parseInt(idPCMaj));
 			} catch (NumberFormatException | ExceptionComputerVide e) {
@@ -42,7 +42,7 @@ public class EditComputerServlet extends  HttpServlet {
 		}
 		
 		
-		Service service = Service.getInstance();
+		ServiceS service = ServiceS.getInstance();
 		List<Company> companies = service.getListCompany();
 		request.setAttribute("listeCompany",companies );
 		
@@ -51,7 +51,7 @@ public class EditComputerServlet extends  HttpServlet {
 	
 	 public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		 	
-		 	Service service = Service.getInstance();
+		 	ServiceS service = ServiceS.getInstance();
 		 	
 		 	String name = request.getParameter( "computerName");
 	        String date_entree = request.getParameter( "introduced" );

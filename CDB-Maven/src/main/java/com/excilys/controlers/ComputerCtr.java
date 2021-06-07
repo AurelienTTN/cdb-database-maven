@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import com.excilys.exceptions.ExceptionListeComputerVide;
 import com.excilys.mapper.Mapper;
@@ -14,35 +16,28 @@ import com.excilys.dto.ComputerDTO;
 import com.excilys.exceptions.ExceptionComputerVide;
 import com.excilys.model.Computer;
 import com.excilys.model.Page;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 import com.excilys.ui.ChoixUtilisateur;
 import com.excilys.ui.ComputerCLI;
 
+@Controller
 public class ComputerCtr {
 	
-
-	private static ComputerCtr instance;
-	private Service service;
+	@Autowired
+	private ServiceS service;
+	@Autowired
 	private ComputerCLI computerCLI;
+	@Autowired
 	private ChoixUtilisateur choixUtilisateur;
-	private static Logger logger = LoggerFactory.getLogger("ComputerCtr");
+	@Autowired
 	private Mapper mappy;
+	
+	private static Logger logger = LoggerFactory.getLogger("ComputerCtr");
 
 	
-	private ComputerCtr() {
-		this.service = Service.getInstance();
-		this.computerCLI = ComputerCLI.getInstance();
-		this.choixUtilisateur = ChoixUtilisateur.getInstance();
-		this.mappy = Mapper.getInstance();
-		
+	private ComputerCtr() {	
 	}
 	
-	public static ComputerCtr getInstance() {
-	       if (instance == null) {
-	            instance = new ComputerCtr();
-	        }
-	        return instance;
-	    }
 	
 	public void afficherListeComputers(){
 			List<Computer> computers= this.service.getListComputer();
@@ -73,7 +68,6 @@ public class ComputerCtr {
 		String out = choixUtilisateur.choixDateSortie();
 		String id_company = choixUtilisateur.choixIDCompany();
 		ComputerDTO computerDTO = new ComputerDTO(name,entree,out,id_company);
-		System.out.println(computerDTO);
 		this.service.ajouterComputer(computerDTO);
 	}
 	
@@ -81,10 +75,7 @@ public class ComputerCtr {
 		
 		int id = choixUtilisateur.choixOrdinateur();
 		Computer computer = service.getOneComputer(id);
-		Mapper mappy = Mapper.getInstance();
 		ComputerDTO computerDTO = mappy.createComputerDTO(computer);
-		System.out.println(computer);
-		System.out.println(computerDTO);
 		
 		String name = choixUtilisateur.choixNom();
 		if(!name.isBlank()) 

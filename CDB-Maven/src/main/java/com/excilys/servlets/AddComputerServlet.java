@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.excilys.dto.ComputerDTO;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 
 @WebServlet("/addComputer")
 public class AddComputerServlet extends HttpServlet{
@@ -21,7 +21,7 @@ public class AddComputerServlet extends HttpServlet{
 	
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		
-		Service service = Service.getInstance();
+		ServiceS service = ServiceS.getInstance();
 		
 		List<Company> companies = service.getListCompany();
 		request.setAttribute("listeCompany",companies );
@@ -39,7 +39,7 @@ public class AddComputerServlet extends HttpServlet{
 	        
 	        
 	        ComputerDTO computerDTO = new ComputerDTO(name,date_entree,date_sortie,companyId);
-	        Service service = Service.getInstance();
+	        ServiceS service = ServiceS.getInstance();
 	        service.ajouterComputer(computerDTO);
 	        response.sendRedirect("dashboard?new=1");
 	    }

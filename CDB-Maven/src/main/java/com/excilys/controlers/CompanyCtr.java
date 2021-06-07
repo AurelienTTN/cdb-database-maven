@@ -1,30 +1,28 @@
 package com.excilys.controlers;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import com.excilys.model.Company;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 import com.excilys.ui.CompanyCLI;
 
+@Controller
 public class CompanyCtr {
 	
 
-	private static CompanyCtr instance;
-	private Service service;
+	
+	@Autowired
+	private ServiceS service;
+	@Autowired
 	private CompanyCLI companyCLI;
 
 	
 	private CompanyCtr() {
-		this.service = Service.getInstance();
-		this.companyCLI = CompanyCLI.getInstance();
 		
 	}
-	
-	public static CompanyCtr getInstance() {
-	       if (instance == null) {
-	            instance = new CompanyCtr();
-	        }
-	        return instance;
-	    }
+
 	
 	public void afficherListeCompagnies() {
 		List<Company> companies = service.getListCompany();

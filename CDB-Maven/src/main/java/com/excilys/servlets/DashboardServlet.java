@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 import com.excilys.model.Computer;
 import com.excilys.model.Page;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 
 import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
@@ -37,7 +37,7 @@ public class DashboardServlet extends HttpServlet {
 		}
 		
 		
-		Service service = Service.getInstance();
+		ServiceS service = ServiceS.getInstance();
 		page.setNbElementTotal(service.getNombreTotalComputer());
 		
 		if(request.getParameter("num")!=null)
@@ -107,7 +107,7 @@ public class DashboardServlet extends HttpServlet {
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		
 		
-			Service service = Service.getInstance();
+			ServiceS service = ServiceS.getInstance();
 			if(request.getParameter("selection")!=null) {
 				String string = request.getParameter("selection");
 				List<String> computerListID = Arrays.asList(string.split(","));

@@ -3,6 +3,9 @@ package com.excilys.ui;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ChoixUtilisateur {
 
 	private static ChoixUtilisateur instance;

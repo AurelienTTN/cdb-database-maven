@@ -9,31 +9,32 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 
 import com.excilys.dto.ComputerDTO;
 import com.excilys.exceptions.ValidationException;
 import com.excilys.model.*;
 import com.excilys.persistence.Dao;
-import com.excilys.service.Service;
+import com.excilys.service.ServiceS;
 import com.excilys.ui.CompanyCLI;
 import com.excilys.validator.Validator;
 
+@Component
 public class Mapper {
 	
+	
 	private static Logger logger = LoggerFactory.getLogger("Mapper");
-	private static Mapper instance;
+	
+	
+	@Autowired
 	private Validator validator;
+	@Autowired
+	private Dao dao;
 	
 	public Mapper() {
-		this.validator = Validator.getInstance();
 	}
-	
-	public static Mapper getInstance() {
-        if (instance == null) {
-            instance = new Mapper();
-        }
-        return instance;
-    }
 
 	
 	public List<Computer> dataToListComputer(ResultSet data) throws SQLException{
@@ -73,7 +74,6 @@ public class Mapper {
 	public List<Company> dataToListCompany(ResultSet data) throws SQLException{
 		
 		List<Company> Companies = new ArrayList<Company>();
-		int i=0;
 		while(data.next()) {
 			Companies.add(dataToCompany(data));
 			
@@ -143,7 +143,7 @@ public class Mapper {
 			computer.setDateSortie(null);
 		
 		if((computerDTO.getCompany()!=null)&&(!computerDTO.getCompany().isBlank()))
-			computer.setCompany(Dao.getInstance().getCompanyById(Integer.parseInt(computerDTO.getCompany())));
+			computer.setCompany(dao.getCompanyById(Integer.parseInt(computerDTO.getCompany())));
 		else
 			computer.setCompany(null);
 		

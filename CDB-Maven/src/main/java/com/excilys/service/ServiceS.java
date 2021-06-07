@@ -1,12 +1,15 @@
 package com.excilys.service;
 
 
-import java.time.LocalDate;
+
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.excilys.dto.ComputerDTO;
 import com.excilys.exceptions.ExceptionComputerVide;
-import com.excilys.exceptions.ExceptionListeComputerVide;
+
 
 import com.excilys.mapper.Mapper;
 import com.excilys.model.Company;
@@ -14,38 +17,24 @@ import com.excilys.model.Computer;
 import com.excilys.persistence.Dao;
 
 
-public final class Service {
+@Service
+public final class ServiceS {
 	
-	    private static Service instance;
+	    @Autowired
 	    private Dao base;
+	    @Autowired
 	    private Mapper mappy;
 	    
 
-	    private Service() {
-
-	        try {
-	            Thread.sleep(1000);
-	        } catch (InterruptedException ex) {
-	            ex.printStackTrace();
-	        }
-	        
-	       
-					
-			this.base = com.excilys.persistence.Dao.getInstance();
-			this.base.connection();  
-			this.mappy= Mapper.getInstance();
+	    private ServiceS() {
+			
 	    }
 
-	    public static Service getInstance() {
-	        if (instance == null) {
-	            instance = new Service();
-	        }
-	        return instance;
-	    }
+
 	    
 	    
 	
-	public List <Computer> getListComputer(){
+	public List <Computer> getListComputer(){ 
 		return this.base.listeComputer();	
 	}
 	
@@ -63,26 +52,26 @@ public final class Service {
 		return computer;		
 	} 
 	
-	public int getNombreTotalComputer() {
+	public int getNombreTotalComputer() {  
 		return this.base.getNombreTotalOrdinateur();
 	}
 	
-	public List <Computer> getElementPage(int index_debut,int nb_element) {
+	public List <Computer> getElementPage(int index_debut,int nb_element) { 
 		return this.base.listeSpecifiquesComputers(index_debut,nb_element);
 	}
 	
 	
-	public Computer creerComputer(ComputerDTO computerDTO) {
+	public Computer creerComputer(ComputerDTO computerDTO) { 
 		return this.mappy.createComputer(computerDTO);
 	}
 	
 	
-	public void ajouterComputer(ComputerDTO computerDTO) {
+	public void ajouterComputer(ComputerDTO computerDTO) { 
 		Computer pc = creerComputer(computerDTO);
 		this.base.ajouterUnComputer(pc);
 	}
 	
-	public void majComputer(Computer computer) {
+	public void majComputer(Computer computer) { 
 		this.base.updateComputer(computer);
 	}
 	

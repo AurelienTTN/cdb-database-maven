@@ -1,12 +1,17 @@
+import com.excilys.exceptions.ExceptionComputerVide;
 import com.excilys.persistence.Dao;
+import com.excilys.ui.MenuCLI;
 
 public class Main2 {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Dao test = Dao.getInstance();
-		test.connection();
-		System.out.println(test.oneComputer(29));
+	public static void main(String[] args) throws ExceptionComputerVide {
+		
+		
+		
+		MenuCLI menu = MenuCLI.getInstance();
+		while(true) {
+			menu.useMenu();
+		}
 		
 	}
 

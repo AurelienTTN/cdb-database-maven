@@ -3,6 +3,9 @@ package com.excilys.validator;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import com.excilys.dto.ComputerDTO;
 import com.excilys.exceptions.ExceptionIncoherenceDates;
 import com.excilys.exceptions.FormatDateException;
@@ -11,23 +14,16 @@ import com.excilys.exceptions.ValidationException;
 import com.excilys.exceptions.IDCompanyInexistant;
 import com.excilys.persistence.Dao;
 
+@Component
 public class Validator {
 	
-	private static Validator instance;
+	@Autowired
+	private static Dao dao;
 	
 	
 	private Validator() {
 		
 	}
-	
-	
-	public static Validator getInstance() {
-        if (instance == null) {
-            instance = new Validator();
-        }
-        return instance;
-	}
-
 	
 	public void validatorDTO (ComputerDTO computerDTO) throws ValidationException {
 		
@@ -77,7 +73,7 @@ public class Validator {
 		if(id!=null) {
 			if(!id.isBlank()) {
 				int id_comp = Integer.parseInt(id);
-				if(Dao.getInstance().getCompanyById(id_comp)==null) {
+				if(dao.getCompanyById(id_comp)==null) {
 					throw new IDCompanyInexistant("L'id"+ id_comp + "n'existe pas");
 				}
 			}
