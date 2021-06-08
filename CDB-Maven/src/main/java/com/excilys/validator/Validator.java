@@ -18,7 +18,7 @@ import com.excilys.persistence.Dao;
 public class Validator {
 	
 	@Autowired
-	private static Dao dao;
+	private Dao dao;
 	
 	
 	private Validator() {
@@ -27,7 +27,7 @@ public class Validator {
 	
 	public void validatorDTO (ComputerDTO computerDTO) throws ValidationException {
 		
-			
+		
 		if(computerDTO.getName().isBlank()) {
 			throw new NameComputerEmpty("L'ordinateur n'a pas de nom indiqué");
 		}
@@ -59,7 +59,6 @@ public class Validator {
 			}
 		}
 		
-		System.out.println(LocalDate.parse(date_out).isBefore(LocalDate.parse(date_entry)));
 		if((date_entry!=null)&&(date_out!=null)) {
 			if((!date_entry.isBlank()) && (!date_out.isBlank())) {
 				if(LocalDate.parse(date_out).isBefore(LocalDate.parse(date_entry)))

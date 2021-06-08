@@ -2,7 +2,6 @@ package com.excilys.servlets;
 
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,13 +10,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+
+import com.excilys.config.AppConfig;
 import com.excilys.model.Computer;
 import com.excilys.model.Page;
 import com.excilys.service.ServiceS;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 
 @WebServlet("/dashboard")
 public class DashboardServlet extends HttpServlet {
@@ -26,9 +30,24 @@ public class DashboardServlet extends HttpServlet {
 	private Page page = new Page();
 	private String search;
 	private String sortedBy;
-
 	
+	private ServiceS service;
+	private static Logger logger = LoggerFactory.getLogger(DashboardServlet.class);
+
+	@Override
+	public void init() {
+		try {
+			super.init();
+			ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+			service = context.getBean(ServiceS.class);
+	}catch(ServletException e) {
+		logger.error(e.getMessage(),e);
+	}
+	}
+
+	@Override
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
+		
 		
 		if(request.getParameter("new")!=null) {
 			this.search=null;
@@ -36,8 +55,6 @@ public class DashboardServlet extends HttpServlet {
 			this.sortedBy = null;
 		}
 		
-		
-		ServiceS service = ServiceS.getInstance();
 		page.setNbElementTotal(service.getNombreTotalComputer());
 		
 		if(request.getParameter("num")!=null)
@@ -104,10 +121,10 @@ public class DashboardServlet extends HttpServlet {
 	
 	}
 	
+	 @Override
 	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		
 		
-			ServiceS service = ServiceS.getInstance();
 			if(request.getParameter("selection")!=null) {
 				String string = request.getParameter("selection");
 				List<String> computerListID = Arrays.asList(string.split(","));
@@ -119,8 +136,6 @@ public class DashboardServlet extends HttpServlet {
 			
 			response.sendRedirect("dashboard");
 	}
-	
-	
 	
 	
 	private void choisirPage(String s) {

@@ -13,6 +13,7 @@ import java.sql.*;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.service.ServiceS;
+import com.excilys.dto.ComputerDTO;
 import com.excilys.mapper.*;
 
 @Repository
@@ -45,15 +46,6 @@ public class Dao {
 	private static final String DELETE_COMPUTER_COMPANY_ID = "DELETE FROM computer WHERE company_id=?;";
 	private static final String DELETE_COMPANY = "DELETE FROM company WHERE id=?;";
 	
-
-	private Dao() {
-		
-	}
-	
-	
-	public Connection getConnection() {
-		return this.con;
-	}
 	
 	public void connection() {
 		
@@ -89,7 +81,8 @@ public class Dao {
 		String query = "SELECT COUNT(*) as numero FROM computer;";
 		ResultSet results = null;
 		int count=0;
-		try(Connection con = DataJDBCConnection.getConnection()){
+		try(Connection con = DataJDBCConnection.getConnection())
+		{
 			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			results.next();
@@ -158,7 +151,7 @@ public class Dao {
 		Company company=null;;
 		
 		try(Connection con = DataJDBCConnection.getConnection()){
-			Statement stmt = this.con.createStatement();
+			Statement stmt = con.createStatement();
 			results = stmt.executeQuery(query);
 			results.next();
 			company = this.mappy.dataToCompany(results);
@@ -189,6 +182,9 @@ public class Dao {
 	}
 	
 	public void ajouterUnComputer(Computer c) {
+		
+		ComputerDTO computerDTO = mappy.createComputerDTO(c);
+		
 		String name = c.getName();
 		LocalDate date_entree_pc = c.getDateEntree();
 		LocalDate date_sortie_pc=c.getDateSortie();

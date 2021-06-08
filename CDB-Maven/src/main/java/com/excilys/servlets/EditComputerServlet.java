@@ -8,14 +8,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
+
+import org.slf4j.LoggerFactory;
+
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.excilys.config.AppConfig;
 import com.excilys.dto.ComputerDTO;
 import com.excilys.exceptions.ExceptionComputerVide;
 import com.excilys.mapper.Mapper;
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.service.ServiceS;
+import org.slf4j.Logger;
 
 
 
@@ -24,7 +31,24 @@ public class EditComputerServlet extends  HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private static String idPCMaj;
-
+	
+	private static Logger logger = LoggerFactory.getLogger(EditComputerServlet.class);
+	private Mapper mappy;
+	private ServiceS service;
+	
+	public void init() {
+		try {
+			super.init();
+			ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+			
+			service = context.getBean(ServiceS.class);
+			mappy=context.getBean(Mapper.class);
+	}catch(ServletException e) {
+		logger.error(e.getMessage(),e);
+	}
+	}
+	
+	@Override
 	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		
 		Computer computer = null;
@@ -32,7 +56,6 @@ public class EditComputerServlet extends  HttpServlet {
 		if(request.getParameter("computerID")!=null) {
 			request.setAttribute("idActualComputer",request.getParameter("computerID") );
 			idPCMaj = request.getParameter("computerID");
-			ServiceS service = ServiceS.getInstance();
 			try {
 				computer = service.getOneComputer(Integer.parseInt(idPCMaj));
 			} catch (NumberFormatException | ExceptionComputerVide e) {
@@ -42,16 +65,15 @@ public class EditComputerServlet extends  HttpServlet {
 		}
 		
 		
-		ServiceS service = ServiceS.getInstance();
 		List<Company> companies = service.getListCompany();
 		request.setAttribute("listeCompany",companies );
 		
 		this.getServletContext().getRequestDispatcher( "/WEB-INF/views/editComputer.jsp" ).forward( request, response );
 	}
 	
+	@Override
 	 public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
 		 	
-		 	ServiceS service = ServiceS.getInstance();
 		 	
 		 	String name = request.getParameter( "computerName");
 	        String date_entree = request.getParameter( "introduced" );
@@ -66,7 +88,7 @@ public class EditComputerServlet extends  HttpServlet {
 				e.printStackTrace();
 			}
 			
-			Mapper mappy = Mapper.getInstance();
+
 			ComputerDTO computerDTO = mappy.createComputerDTO(computer);
 			
 			if(!name.isBlank()) 
