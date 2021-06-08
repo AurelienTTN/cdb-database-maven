@@ -1,6 +1,5 @@
 package com.excilys.persistence;
 
-import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import java.sql.*;
 
 import com.excilys.model.Company;
 import com.excilys.model.Computer;
-import com.excilys.service.ServiceS;
 import com.excilys.dto.ComputerDTO;
 import com.excilys.mapper.*;
 
@@ -185,30 +183,13 @@ public class Dao {
 		
 		ComputerDTO computerDTO = mappy.createComputerDTO(c);
 		
-		String name = c.getName();
-		LocalDate date_entree_pc = c.getDateEntree();
-		LocalDate date_sortie_pc=c.getDateSortie();
-		Company company = c.getCompany();
 		try(Connection con = DataJDBCConnection.getConnection()){
 			PreparedStatement ps = con.prepareStatement(AJOUT_ONE_COMPUTER);
 			
-			ps.setString(1,name);
-			
-			if(date_entree_pc!=null)
-				ps.setDate(2, Date.valueOf(date_entree_pc));
-			else
-				ps.setDate(2, null);
-			
-			
-			if(date_sortie_pc!=null)
-				ps.setDate(3, Date.valueOf(date_sortie_pc));
-			else
-				ps.setDate(3, null);
-			
-			if(company!=null)
-				ps.setInt(4, company.getId());
-			else
-				ps.setNull(4,Types.NULL);
+			ps.setString(1,computerDTO.getName());
+			setDateOrNull(ps,2,computerDTO.getDateEntree());
+			setDateOrNull(ps,3,computerDTO.getDateSortie());
+			setIDCompanyOrNull(ps,4,computerDTO.getCompany());
 			
 			ps.executeUpdate();
 			
@@ -217,38 +198,19 @@ public class Dao {
 			logger.error("Problème lié à la requête SQL",e);
 		}
 	}
-	
-	
 	
 	public void updateComputer(Computer c) {
-		int id = c.getId();
-		String name = c.getName();
-		LocalDate date_entree_pc = c.getDateEntree();
-		LocalDate date_sortie_pc=c.getDateSortie();
-		Company company = c.getCompany();
-		try(Connection con = DataJDBCConnection.getConnection()){
+
+		ComputerDTO computerDTO = mappy.createComputerDTO(c);
+		try(Connection con = DataJDBCConnection.getConnection())
+		{
 			PreparedStatement ps = con.prepareStatement(UPDATE_COMPUTER);
 			
-			ps.setString(1,name);
-			
-			if(date_entree_pc!=null)
-				ps.setDate(2, Date.valueOf(date_entree_pc));
-			else
-				ps.setDate(2, null);
-			
-			
-			if(date_sortie_pc!=null)
-				ps.setDate(3, Date.valueOf(date_sortie_pc));
-			else
-				ps.setDate(3, null);
-			
-			if(company!=null)
-				ps.setInt(4, company.getId());
-			else
-				ps.setNull(4,Types.NULL);
-			
-			ps.setInt(5,id) ;
-			
+			ps.setString(1,computerDTO.getName());
+			setDateOrNull(ps,2,computerDTO.getDateEntree());
+			setDateOrNull(ps,3,computerDTO.getDateSortie());
+			setIDCompanyOrNull(ps,4,computerDTO.getCompany());
+			ps.setString(5,computerDTO.getId()) ;
 			
 			ps.executeUpdate();
 			
@@ -257,6 +219,8 @@ public class Dao {
 			logger.error("Problème lié à la requête SQL",e);
 		}
 	}
+	
+	
 	
 	
 	public void deleteComputer(int id) {
@@ -278,7 +242,8 @@ public class Dao {
 		ResultSet results=null;
 		List<Computer> computers = new ArrayList<Computer>();
 		
-		try (Connection con = DataJDBCConnection.getConnection()){
+		try (Connection con = DataJDBCConnection.getConnection())
+		{
 			PreparedStatement ps = con.prepareStatement(SEARCH_COMPUTER_BY_NAME);
 			ps.setString(1,"%"+nameC+"%");
 			ps.setString(2,"%"+nameC+"%");
@@ -424,7 +389,23 @@ public class Dao {
 		}
 			
 
-	}		
+	}	
+	
+	private void setDateOrNull(PreparedStatement ps,int pos,String date) throws SQLException{
+		if("".equals(date)) {
+			ps.setNull(pos, java.sql.Types.TIMESTAMP);
+		}else {
+			ps.setString(pos, date);
+		}
+	}
+	
+	private void setIDCompanyOrNull(PreparedStatement ps,int pos,String id) throws SQLException{
+		if("".equals(id)) {
+			ps.setNull(pos, java.sql.Types.NULL);
+		}else {
+			ps.setString(pos, id);
+		}
+	}
 		
 }
 

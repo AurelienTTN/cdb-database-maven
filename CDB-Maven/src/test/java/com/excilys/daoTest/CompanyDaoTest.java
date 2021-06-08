@@ -19,6 +19,7 @@ import com.excilys.persistence.Dao;
 
 class CompanyDaoTest {
 	
+	
 	private static Dao daoTest;
 
 	@BeforeAll
