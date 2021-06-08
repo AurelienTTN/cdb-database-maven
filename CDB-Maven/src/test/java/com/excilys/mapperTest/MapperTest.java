@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.excilys.dto.ComputerDTO;
 import com.excilys.mapper.Mapper;
@@ -17,12 +18,17 @@ import junit.framework.TestCase;
 
 public class MapperTest extends TestCase {
 	
+	
+	@Autowired
+	private Mapper mappy;
+	
+	
 	@Test
 	public final void testCreateComputerfromDTO() {
 		
 		//test sur les dates
 		
-		Mapper mappy = com.excilys.mapper.Mapper.getInstance();
+
 		ComputerDTO computerDTO = new ComputerDTO("Jerome","2020-11-03","2019-11-02","23");
 		Computer computer = mappy.createComputer(computerDTO);
 		if(computer!=null) {
