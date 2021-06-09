@@ -33,8 +33,6 @@ public class Mapper {
 	@Autowired
 	private Dao dao;
 	
-	public Mapper() {
-	}
 
 	
 	public List<Computer> dataToListComputer(ResultSet data) throws SQLException{

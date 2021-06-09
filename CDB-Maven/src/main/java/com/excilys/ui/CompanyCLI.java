@@ -9,19 +9,7 @@ import com.excilys.model.Company;
 @Component
 public class CompanyCLI {
 	
-private static CompanyCLI instance;
-	
-	private CompanyCLI() {
-		
-	}
-	
-	
-	public static CompanyCLI getInstance() {
-        if (instance == null) {
-            instance = new CompanyCLI();
-        }
-        return instance;
-    }
+
 	public void afficherCompany(Company computer) {
 		System.out.println(computer);
 	}

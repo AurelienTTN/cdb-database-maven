@@ -22,6 +22,12 @@ public class Main {
 	public static void main(String[] args) throws IOException, SQLException, ExceptionComputerVide {
 		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 		
+		Dao dao = context.getBean(Dao.class);
+		System.out.println("print nb ordinateur = "+ dao.getNombreTotalOrdinateur());
+		System.out.println(dao.getCompanyById(5));
+		System.out.println(dao.oneComputer(140));
+		
+		
 		MenuCLI menu = context.getBean(MenuCLI.class);
 		while(true) {
 			menu.useMenu();

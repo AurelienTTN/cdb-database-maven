@@ -12,16 +12,11 @@ import com.excilys.ui.CompanyCLI;
 public class CompanyCtr {
 	
 
-	
 	@Autowired
 	private ServiceS service;
 	@Autowired
 	private CompanyCLI companyCLI;
 
-	
-	private CompanyCtr() {
-		
-	}
 
 	
 	public void afficherListeCompagnies() {

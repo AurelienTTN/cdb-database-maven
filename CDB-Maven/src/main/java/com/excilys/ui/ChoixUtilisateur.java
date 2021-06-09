@@ -8,19 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ChoixUtilisateur {
 
-	private static ChoixUtilisateur instance;
-	
-	private ChoixUtilisateur() {
-		
-	}
-	
-	public static ChoixUtilisateur getInstance() {
-	       if (instance == null) {
-	            instance = new ChoixUtilisateur();
-	        }
-	        return instance;
-	    }
-	
 	public int choixMenu() {
 		Scanner sc = new Scanner(System.in);
 		return sc.nextInt();

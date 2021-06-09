@@ -19,7 +19,6 @@ public class MenuCLI {
 	@Autowired
 	private ChoixUtilisateur choixUtilisateur;
 	
-	
 
 	public void afficherMenu() {
 		System.out.println("Que voulez vous faire ? Tapez le numéro correspondant à votre requête \n");

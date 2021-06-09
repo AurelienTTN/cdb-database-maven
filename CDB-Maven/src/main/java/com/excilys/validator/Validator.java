@@ -20,11 +20,7 @@ public class Validator {
 	@Autowired
 	private Dao dao;
 	
-	
-	private Validator() {
-		
-	}
-	
+
 	public void validatorDTO (ComputerDTO computerDTO) throws ValidationException {
 		
 		

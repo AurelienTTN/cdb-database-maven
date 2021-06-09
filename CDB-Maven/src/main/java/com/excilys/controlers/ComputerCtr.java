@@ -35,9 +35,6 @@ public class ComputerCtr {
 	private static Logger logger = LoggerFactory.getLogger("ComputerCtr");
 
 	
-	private ComputerCtr() {	
-	}
-	
 	
 	public void afficherListeComputers(){
 			List<Computer> computers= this.service.getListComputer();

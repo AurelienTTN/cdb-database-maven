@@ -20,20 +20,14 @@ import com.excilys.persistence.Dao;
 @Service
 public final class ServiceS {
 	
-	    @Autowired
+		@Autowired
 	    private Dao base;
-	    @Autowired
+		@Autowired
 	    private Mapper mappy;
 	    
 
-	    private ServiceS() {
-			
-	    }
 
-
-	    
-	    
-	
+	   
 	public List <Computer> getListComputer(){ 
 		return this.base.listeComputer();	
 	}
