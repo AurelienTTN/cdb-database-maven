@@ -103,9 +103,6 @@ public final class ServiceS {
 		this.base.deleteCompanyByID(id);
 	}
 	
-	public List<Computer> getListeOrdered(int deb,int index_fin,String orderBy,String search){
-		return this.base.getListComputerOrdered(deb, index_fin, orderBy, search);
-	}
 	
 	
 	

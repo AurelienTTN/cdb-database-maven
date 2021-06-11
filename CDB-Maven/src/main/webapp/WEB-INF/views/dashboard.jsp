@@ -2,33 +2,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="utf-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
 <title>Computer Database</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta charset="utf-8">
 <!-- Bootstrap -->
-<link href="./css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="./css/font-awesome.css" rel="stylesheet" media="screen">
-<link href="./css/main.css" rel="stylesheet" media="screen">
+<link href="./resources/css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="./resources/css/font-awesome.css" rel="stylesheet" media="screen">
+<link href="./resources/css/main.css" rel="stylesheet" media="screen">
 </head>
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="dashboard?new=1"> Application - Computer Database </a>
+            <a class="navbar-brand" href="new"> Application - Computer Database </a>
         </div>
     </header>
 
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                ${page.nbElementTotal } Computers found
+                ${session.page.nbElementTotal } Computers found
             </h1>
             <div id="actions" class="form-horizontal">
                 <div class="pull-left">
-                    <form id="searchForm" action="#" method="GET" class="form-inline">
+                    <form id="search" action="search#" method="GET" class="form-inline">
 
-                        <input type="search" id="searchbox" name="search" class="form-control" placeholder="Search name" />
+                        <input type="search" id="search" name="search" class="form-control" placeholder="Search name" />
                         <input type="submit" id="searchsubmit" value="Filter by name"
                         class="btn btn-primary" />
                     </form>
@@ -40,9 +41,9 @@
             </div>
         </div>
 
-        <form id="deleteForm" action="dashboard" method="POST">
-            <input type="hidden" name="selection" value="">
-        </form>
+        <form id="deleteForm" action="delete#" method="POST">
+			<input type="hidden" name="selection" value="">
+		</form>
 
         <div class="container" style="margin-top: 10px;">
             <table class="table table-striped table-bordered">
@@ -61,20 +62,20 @@
                         </th>
                         
                         <th>
-                             <a href="dashboard?orderBy=name" onclick="">Computer Name</a>
+                             <a href="order?orderBy=name" onclick="">Computer Name</a>
                         </th>
                         <th>
-                        	<a href="dashboard?orderBy=introduced" onclick=""> Introduced date</a>
+                        	<a href="order?orderBy=introduced" onclick=""> Introduced date</a>
                            
                         </th>
                         <!-- Table header for Discontinued Date -->
                         <th>
-                        	<a href="dashboard?orderBy=discontinued" onclick=""> Discontinued date</a>
+                        	<a href="order?orderBy=discontinued" onclick=""> Discontinued date</a>
                             
                         </th>
                         <!-- Table header for Company -->
                         <th>
-                        	<a href="dashboard?orderBy=company_id" onclick=""> Company</a>
+                        	<a href="order?orderBy=company_id" onclick=""> Company</a>
                         </th>
 
                     </tr>
@@ -107,25 +108,25 @@
         <div class="container text-center">
             <ul class="pagination">
                 <li>
-                    <a href="?boutonDebFin=0" aria-label="Previous">
+                    <a href="extremites?boutonDebFin=0" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                   </a>
               </li>
               <li>
-              <c:if test = "${page.numeroPage -2 > 0}">
-              <a href="?num=-2">${page.numeroPage - 2}</a></c:if></li>
+              <c:if test = "${session.page.numeroPage -2 > 0}">
+              <a href="getNumPage?num=-2">${session.page.numeroPage - 2}</a></c:if></li>
               <li>
-              <c:if test = "${page.numeroPage -1 > 0}">
-              <a href="?num=-1">${page.numeroPage - 1}</a></c:if></li>
-              <li><a href="?num=0">.. </a></li>
+              <c:if test = "${session.page.numeroPage -1 > 0}">
+              <a href="getNumPage?num=-1">${session.page.numeroPage - 1}</a></c:if></li>
+              <li><a href="getNumPage?num=0">.. </a></li>
                
-              <li><c:if test = "${page.numeroPage <= page.nbElementTotal/page.nbLigne}">
-              <a href="?num=1">${page.numeroPage + 1}</a></c:if></li>
+              <li><c:if test = "${session.page.numeroPage <= session.page.nbElementTotal/session.page.nbLigne}">
+              <a href="getNumPage?num=1">${session.page.numeroPage + 1}</a></c:if></li>
               <li>
-              <c:if test = "${page.numeroPage + 1 <= page.nbElementTotal/page.nbLigne}">
-              <a href="?num=2">${page.numeroPage + 2}</a></c:if></li>
+              <c:if test = "${session.page.numeroPage + 1 <= session.page.nbElementTotal/session.page.nbLigne}">
+              <a href="getNumPage?num=2">${session.page.numeroPage + 2}</a></c:if></li>
               <li>
-                <a href="?boutonDebFin=1" aria-label="Next">
+                <a href="extremites?boutonDebFin=1" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -133,7 +134,7 @@
         
 
         <div class="btn-group btn-group-sm pull-right" role="group" >
-        	<form id="pageSize" action="#" method="GET" class="form-inline">
+        	<form id="bouton" action="getNbElement#" method="GET" class="form-inline">
 	            <button type="submit" class="btn btn-default" name = "bouton" value="10" >10</button>
 	            <button type="submit" class="btn btn-default" name="bouton" value="50">50</button>
 	            <button type="submit" class="btn btn-default" name="bouton" value="100">100</button>
@@ -141,9 +142,9 @@
         </div>
 
     </footer>
-<script src="./js/jquery.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
-<script src="./js/dashboard.js"></script>
+<script src="./resources/js/jquery.min.js"></script>
+<script src="./resources/js/bootstrap.min.js"></script>
+<script src="./resources/js/dashboard.js"></script>
 
 </body>
 </html>

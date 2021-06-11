@@ -9,6 +9,9 @@ public class ComputerDTO {
 	private String dateEntree;
 	private String dateSortie;
 	
+	public ComputerDTO() {
+	}
+	
 	public ComputerDTO(String id,String name,String dateEntree,String dateSortie,String company) {
 		this.id = id;
 		this.name=name;

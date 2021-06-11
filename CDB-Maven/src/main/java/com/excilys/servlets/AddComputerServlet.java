@@ -1,19 +1,21 @@
 package com.excilys.servlets;
 
-import java.io.IOException;
+
+
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.excilys.config.AppConfig;
 import com.excilys.dto.ComputerDTO;
@@ -22,48 +24,34 @@ import com.excilys.model.Company;
 import com.excilys.model.Computer;
 import com.excilys.service.ServiceS;
 
-@WebServlet("/addComputer")
+@Controller
 public class AddComputerServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 	
 	private static Logger logger = LoggerFactory.getLogger(AddComputerServlet.class);
+	
 	private ServiceS service;
 	
-	@Override
-	public void init() {
-		try {
-			super.init();
-			ConfigurableApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-			
-			service = context.getBean(ServiceS.class);
-	}catch(ServletException e) {
-		logger.error(e.getMessage(),e);
-	}
+	public AddComputerServlet(ServiceS service) {
+		this.service = service;
 	}
 	
-	@Override
-	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		
-		
-		List<Company> companies = service.getListCompany();
-		request.setAttribute("listeCompany",companies );
 
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/views/addComputer.jsp" ).forward( request, response );
-		
-		
+	@GetMapping(value="/addComputer")
+	public ModelAndView addComputer() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("addComputer");
+		List<Company> listeCompany = service.getListCompany();
+		mv.addObject("listeCompany", listeCompany);
+		mv.addObject("computerDTO",new ComputerDTO());
+		return mv;
 	}
 	
-	@Override
-	 public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		 	String name = request.getParameter( "computerName");
-	        String date_entree = request.getParameter( "introduced" );
-	        String date_sortie = request.getParameter( "discontinued");
-	        String companyId = request.getParameter( "companyId" );
-	        
-	        
-	        ComputerDTO computerDTO = new ComputerDTO(name,date_entree,date_sortie,companyId);
-	        service.ajouterComputer(computerDTO);
-	        response.sendRedirect("dashboard?new=1");
-	    }
+	@PostMapping(value ="/addComputer")
+		public String add(@ModelAttribute("computerDTO") ComputerDTO computerDTO) {
+	    service.ajouterComputer(computerDTO);
+	    return "redirect:/addComputer";
+	}
+	
 }

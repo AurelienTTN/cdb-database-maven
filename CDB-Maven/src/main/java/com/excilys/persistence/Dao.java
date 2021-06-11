@@ -47,6 +47,10 @@ public class Dao {
 	
 
 	
+	private static final String DELETE_COMPUTER_COMPANY_ID = "DELETE FROM computer WHERE company_id=?;";
+	private static final String DELETE_COMPANY = "DELETE FROM company WHERE id=?;";
+	
+	
 	private static final String QUERY_COUNT = "SELECT COUNT(*) FROM computer";
 	private static final String QUERY_LISTE_PAGE = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id LIMIT :offset,:limit ;";
 	private static final String QUERY_LISTE_COMPUTER = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id;";
@@ -64,14 +68,28 @@ public class Dao {
 	private static final String QUERY_ORDER_BY_NAME = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY computer.name LIMIT :limit,:offset;";
 	private static final String QUERY_ORDER_BY_INTRODUCED = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY computer.introduced DESC LIMIT :limit,:offset;";
 	private static final String QUERY_ORDER_BY_DISCONTINUED = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY computer.discontinued DESC LIMIT :limit,:offset;";
-	private static final String QUERY_ORDER_BY_COMPANY = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY company.name DESC LIMIT :limit,:offset;";
+	private static final String QUERY_ORDER_BY_COMPANY = "SELECT * FROM computer LEFT JOIN company on company.id = computer.company_id ORDER BY company.name LIMIT :limit,:offset;";
 	
+	public void connectionForTest() {
+			
+			/* */
+			try {
+				 Class.forName("org.h2.Driver");
+			    this.con = DriverManager.getConnection( this.urlTest, this.nameTest, this.passwordTest );
+			  
+			} catch ( SQLException e ) {
+				logger.error("Connection à la base impossible",e);
+			} catch (ClassNotFoundException e) {
+				logger.error("Connexion impossible", e);
+			}     
+		}
 
 	public int getNombreTotalOrdinateur() {
 		JdbcTemplate jdbc = new JdbcTemplate(dataSource);
 		int result = jdbc.queryForObject(QUERY_COUNT, Integer.class);
 		return result;
 	}
+	
 	
 		
 	public List <Computer> listeSpecifiquesComputers(int debut,int nombre) {
@@ -247,7 +265,6 @@ public class Dao {
 
 	}	
 	
-
 		
 }
 
