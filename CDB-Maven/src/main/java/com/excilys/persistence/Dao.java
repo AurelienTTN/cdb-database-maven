@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -234,6 +233,8 @@ public class Dao {
 		List<Computer> computer = jdbcTemplate.query(QUERY_ORDER_BY_COMPANY, params,computerRowMapper);
 		return computer;
 	}
+	
+	
 	
 	
 

@@ -4,6 +4,7 @@ package com.excilys.servlets;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,6 +69,7 @@ public class DashboardServlet extends HttpServlet {
 		return VUE_DASHBOARD_REDIRECT;
 	}
 	
+
 	@GetMapping(value = "/getNumPage", params = "num")
 	public String updateNumPage(@RequestParam("num") int num) {
 		this.session.getPage().setNumeroPage(this.session.getPage().getNumeroPage()+num);
@@ -108,6 +110,9 @@ public class DashboardServlet extends HttpServlet {
 		}
 		return VUE_DASHBOARD_REDIRECT;
 	}
+
+	
+	
 	
 	
 	private List<Computer> getListeComputer(){

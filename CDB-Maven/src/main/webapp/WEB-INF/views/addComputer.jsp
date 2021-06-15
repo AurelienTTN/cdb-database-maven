@@ -3,6 +3,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <title>Computer Database</title>
@@ -15,7 +16,7 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="dashboard?new=1"> Application - Computer Database </a>
+            <a class="navbar-brand" href="dashboard?new=1"> <spring:message code="label.title"/></a>
         </div>
     </header>
 
@@ -23,23 +24,26 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-8 col-xs-offset-2 box">
-                    <h1>Add Computer</h1>
+                    <h1><spring:message code="add.title"/></h1>
                     <form:form method="POST" action="addComputer" modelAttribute="computerDTO">
                         <fieldset>
                             <div class="form-group">
-                                <form:label path="name">Computer name</form:label>
-                                <form:input required="required" type="text" class="form-control" path="name" placeholder="Computer name"/>
+                                <form:label path="name"><spring:message code="computer.title"/></form:label>
+         						<spring:message code="computer.title" var="computerTitle"/>
+                                <form:input required="required" type="text" class="form-control" path="name" placeholder="${computerTitle}"/>
                             </div>
                             <div class="form-group">
-                                <form:label path="dateEntree">Introduced date</form:label>
-                                <form:input type="date" class="form-control" path="dateEntree" placeholder="Introduced date"/>
+                                <form:label path="dateEntree"><spring:message code="introduced.title"/></form:label>
+                                	<spring:message code="introduced.title" var="introducedTitle"/>
+                                <form:input type="date" class="form-control" path="dateEntree" placeholder="${introducedTitle}"/>
                             </div>
                             <div class="form-group">
-                                <form:label path="dateSortie">Discontinued date</form:label>
-                                <form:input type="date" class="form-control" path="dateSortie" placeholder="Discontinued date"/>  
+                                <form:label path="dateSortie"><spring:message code="discontinued.title"/></form:label>
+                                	<spring:message code="discontinued.title" var="discontinuedTitle"/>
+                                <form:input type="date" class="form-control" path="dateSortie" placeholder="${discontinuedTitle}"/>  
                             </div>
                             <div class="form-group">
-                                <form:label path="company">Company</form:label>
+                                <form:label path="company"><spring:message code="company.title"/></form:label>
                                 <select class="form-control" id="company" name="company" >
                                
                                 <c:forEach items="${listeCompany}" var="company">
@@ -53,9 +57,10 @@
                         <span id=alerteDate style=display:none>Dates incorrectes</span>
                         <span id=alerteName style=display:none>Veuillez rentrer un nom correct</span>
                         <div class="actions pull-right">
-                            <input type="submit" value="addComputer" class="btn btn-primary">
-                            or
-                            <a href="dashboard" class="btn btn-default">Cancel</a>
+                        	<spring:message code="add.button" var="addButton"/>
+                            <input type="submit" value="${addButton}" class="btn btn-primary">
+                            <spring:message code="or.label" />
+                            <a href="dashboard" class="btn btn-default"> <spring:message code="cancel.button" /></a>
                         </div>
                     </form:form>
                 </div>

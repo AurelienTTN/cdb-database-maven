@@ -17,4 +17,4 @@ $(document).submit(function(event) {
 	    $("#alerteName").show();
 	 }
 	 
-});	
+});

@@ -3,6 +3,7 @@
     pageEncoding="utf-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 <title>Computer Database</title>
@@ -15,7 +16,7 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="dashboard?new=1"> Application - Computer Database </a>
+            <a class="navbar-brand" href="dashboard?new=1"> <spring:message code="label.title"/> </a>
         </div>
     </header>
     <section id="main">
@@ -31,19 +32,21 @@
                         <form:input path="id" name="id" type="hidden" value="${computerActual.id}"/> 
                         <fieldset>
                             <div class="form-group">
-                                <form:label path="name">Computer name : ${computerActual.name}</form:label>
-                                <form:input type="text" value="${computerActual.name}" class="form-control" path="name" placeholder="Computer name"/>
+                            	
+                                <form:label path="name"><spring:message code="computer.title"/> : ${computerActual.name}</form:label>
+                                <spring:message code="computer.title" var="computerTitle"/>
+                                <form:input type="text" value="${computerActual.name}" class="form-control" path="name" placeholder="${computerTitle}"/>
                             </div>
                             <div class="form-group">
-                                <form:label path="dateEntree">Introduced date : ${computerActual.dateEntree} </form:label>
+                                <form:label path="dateEntree"><spring:message code="introduced.title"/> : ${computerActual.dateEntree} </form:label>
                                 <form:input type="date" class="form-control" value="${computerActual.dateEntree }" path="dateEntree" placeholder="Introduced date"/>
                             </div>
                             <div class="form-group">
-                                <form:label path="dateSortie">Discontinued date : ${computerActual.dateSortie}</form:label>
+                                <form:label path="dateSortie"><spring:message code="discontinued.title"/> : ${computerActual.dateSortie}</form:label>
                                 <form:input type="date" class="form-control" value= "${computerActual.dateSortie}" path="dateSortie" placeholder="Discontinued date"/>
                             </div>
                             <div class="form-group">
-                                <form:label path="company">Company : ${computerActual.company}</form:label>
+                                <form:label path="company"><spring:message code="company.title"/> ${computerActual.company}</form:label>
                                 <form:select class="form-control" path="company">
                                 	
                                  <c:forEach items="${listeCompany}" var="company">
@@ -54,9 +57,10 @@
                             </div>            
                         </fieldset>
                         <div class="actions pull-right">
-                            <input type="submit" value="Edit" class="btn btn-primary">
+                        	<spring:message code="edit.button" var="editButton"/>
+                            <input type="submit" value="${editButton}" class="btn btn-primary">
                             or
-                            <a href="dashboard" class="btn btn-default">Cancel</a>
+                            <a href="dashboard" class="btn btn-default"><spring:message code="cancel.button"/></a>
                         </div>
                     </form:form>
                 </div>

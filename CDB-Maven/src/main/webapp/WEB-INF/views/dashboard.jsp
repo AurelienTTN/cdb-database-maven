@@ -3,6 +3,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib  uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <html>
 <head>
 <title>Computer Database</title>
@@ -16,27 +18,28 @@
 <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="new"> Application - Computer Database </a>
+            <a class="navbar-brand" href="new"> <spring:message code="label.title"/></a>
         </div>
     </header>
 
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                ${session.page.nbElementTotal } Computers found
+                ${session.page.nbElementTotal } <spring:message code="computer.found"/>
             </h1>
             <div id="actions" class="form-horizontal">
                 <div class="pull-left">
                     <form id="search" action="search#" method="GET" class="form-inline">
-
-                        <input type="search" id="search" name="search" class="form-control" placeholder="Search name" />
-                        <input type="submit" id="searchsubmit" value="Filter by name"
-                        class="btn btn-primary" />
+						<spring:message code="text.search" var="searchText"/>
+                        <input type="search" id="search" name="search" class="form-control" placeholder="${searchText}" />
+                        <spring:message code="text.search" var="searchText2"/>
+                        <input type="submit" id="searchsubmit" value="${searchText}"
+                        class="btn btn-primary"/>
                     </form>
                 </div>
                 <div class="pull-right">
-                    <a class="btn btn-success" id="addComputer" href="addComputer">Add Computer</a> 
-                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();">Edit</a>
+                    <a class="btn btn-success" id="addComputer" href="addComputer"><spring:message code="add.computer"/></a> 
+                    <a class="btn btn-default" id="editComputer" href="#" onclick="$.fn.toggleEditMode();"><spring:message code="edit.button"/></a>
                 </div>
             </div>
         </div>
@@ -62,20 +65,20 @@
                         </th>
                         
                         <th>
-                             <a href="order?orderBy=name" onclick="">Computer Name</a>
+                             <a href="order?orderBy=name" onclick=""><spring:message code="computer.title"/></a>
                         </th>
                         <th>
-                        	<a href="order?orderBy=introduced" onclick=""> Introduced date</a>
+                        	<a href="order?orderBy=introduced" onclick=""><spring:message code="introduced.title"/></a>
                            
                         </th>
                         <!-- Table header for Discontinued Date -->
                         <th>
-                        	<a href="order?orderBy=discontinued" onclick=""> Discontinued date</a>
+                        	<a href="order?orderBy=discontinued" onclick=""><spring:message code="discontinued.title"/></a>
                             
                         </th>
                         <!-- Table header for Company -->
                         <th>
-                        	<a href="order?orderBy=company_id" onclick=""> Company</a>
+                        	<a href="order?orderBy=company_id" onclick=""> <spring:message code="company.title"/></a>
                         </th>
 
                     </tr>
@@ -105,6 +108,15 @@
     </section>
 
     <footer class="navbar-fixed-bottom">
+    
+      <div class="btn-group btn-group-sm pull-left" role="group" >
+      	
+        <form id="bouton" action="dashboard?langue#" method="GET" class="form-inline">
+	            <button type="submit" class="btn btn-default" name = "lang" value="EN" >Anglais</button>
+	            <button type="submit" class="btn btn-default" name="lang" value="FR">Français</button>
+         </form>        
+       </div>
+	         
         <div class="container text-center">
             <ul class="pagination">
                 <li>
@@ -140,6 +152,7 @@
 	            <button type="submit" class="btn btn-default" name="bouton" value="100">100</button>
             </form>
         </div>
+       </div>
 
     </footer>
 <script src="./resources/js/jquery.min.js"></script>
