@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import com.excilys.dto.ComputerDTO;
@@ -27,9 +28,10 @@ public class Mapper {
 	
 	private static Logger logger = LoggerFactory.getLogger("Mapper");
 	
-	
+
 	@Autowired
 	private Validator validator;
+	@Lazy
 	@Autowired
 	private Dao dao;
 	
@@ -145,7 +147,6 @@ public class Mapper {
 		else
 			computer.setCompany(null);
 		
-		System.out.println(computer);
 		
 		return computer;	
 	}

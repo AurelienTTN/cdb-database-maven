@@ -2,13 +2,27 @@ package com.excilys.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity(name="computer")
+@Table(name="computer")
 public class Computer {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	@ManyToOne
+	@JoinColumn(name = "company_id")
 	private Company company;
-	private LocalDate dateEntree;
-	private LocalDate dateSortie;
+	private LocalDate introduced;
+	private LocalDate discontinued;
 	
 	public Computer() {
 			
@@ -19,8 +33,8 @@ public class Computer {
 		this.id=id;
 		this.name = name;
 		this.company = company;
-		this.dateEntree=dateEntree;
-		this.dateSortie=dateSortie;
+		this.introduced=dateEntree;
+		this.discontinued=dateSortie;
 	
 
 	}
@@ -33,8 +47,8 @@ public class Computer {
 		
 		this.name = name;
 		this.company = company;
-		this.dateEntree=dateEntree;
-		this.dateSortie=dateSortie;
+		this.introduced=dateEntree;
+		this.discontinued=dateSortie;
 	
 	}
 	
@@ -42,7 +56,7 @@ public class Computer {
 	
 	@Override
 	public String toString() {
-		return this.id + " " + this.name+" "+this.dateEntree+" "+this.dateSortie+" "+this.company;
+		return this.id + " " + this.name+" "+this.introduced+" "+this.discontinued+" "+this.company;
 	}
 
 	public int getId() {
@@ -70,19 +84,19 @@ public class Computer {
 	}
 
 	public LocalDate getDateEntree() {
-		return dateEntree;
+		return introduced;
 	}
 
 	public void setDateEntree(LocalDate dateEntree) {
-		this.dateEntree = dateEntree;
+		this.introduced = dateEntree;
 	}
 
 	public LocalDate getDateSortie() {
-		return dateSortie;
+		return discontinued;
 	}
 
 	public void setDateSortie(LocalDate dateSortie) {
-		this.dateSortie = dateSortie;
+		this.discontinued = dateSortie;
 	}
 	
 	

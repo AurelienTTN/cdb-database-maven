@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,13 +44,16 @@ public class DashboardServlet extends HttpServlet {
 		this.session = session;
 		session.setPage(new Page());
 		this.session.getPage().setNbElementTotal(service.getNombreTotalComputer());
+		this.session.setNbComputerFound(service.getNombreTotalComputer());
+		
 	}
 	
 	@GetMapping(value="/new")
 	public String newDashboard() {
 		this.session = new Session();
-		this.session.setPage(new Page());
+		session.setPage(new Page());
 		this.session.getPage().setNbElementTotal(service.getNombreTotalComputer());
+		this.session.setNbComputerFound(service.getNombreTotalComputer());
 		return VUE_DASHBOARD_REDIRECT;
 	}
 	
@@ -63,18 +69,19 @@ public class DashboardServlet extends HttpServlet {
 		return mv;
 	}
 	
+	
 	@GetMapping(value = "/getNbElement", params = "bouton")
 	public String updateNbElementPage(@RequestParam("bouton") int numLigne) {
 		this.session.getPage().setNbLigne(numLigne);
 		return VUE_DASHBOARD_REDIRECT;
 	}
-	
 
 	@GetMapping(value = "/getNumPage", params = "num")
 	public String updateNumPage(@RequestParam("num") int num) {
 		this.session.getPage().setNumeroPage(this.session.getPage().getNumeroPage()+num);
 		return VUE_DASHBOARD_REDIRECT;
 	}
+	
 	
 	@GetMapping(value = "/extremites", params = "boutonDebFin")
 	public String updatePage(@RequestParam("boutonDebFin") String num) {
@@ -85,23 +92,32 @@ public class DashboardServlet extends HttpServlet {
 			int nbTotal = session.getPage().getNbElementTotal();
 			int nbParPage = session.getPage().getNbLigne();
 			this.session.getPage().setNumeroPage((nbTotal%nbParPage) == 0 ? nbTotal/nbParPage : nbTotal/nbParPage +1);
-		
 		}
 		return VUE_DASHBOARD_REDIRECT;
 	}
 	
+
+	
+	
 	@GetMapping(value = "/order", params = "orderBy")
 	public String updateOrder(@RequestParam("orderBy") String orderBy) {
-		this.session.setOrderBy(orderBy);
+		if(this.session.getOrderBy()!=null && orderBy.equals(this.session.getOrderBy()))
+			this.session.setSort("DESC");
+		else {
+			this.session.setOrderBy(orderBy);
+			this.session.setSort("ASC");
+		}
 		return VUE_DASHBOARD_REDIRECT;
 	}
+	
 	
 	@GetMapping(value="/search",params="search")
 	public String updateSearch(@RequestParam("search") String search) {
 		this.session.setSearch(search);
+		session.getPage().setNumeroPage(1);
 		return VUE_DASHBOARD_REDIRECT;
 	}
-	
+
 	@PostMapping(value="/delete")
 	public String delete(@RequestParam("selection") String selection) {
 		List<String> computerListID = Arrays.asList(selection.split(","));
@@ -113,148 +129,35 @@ public class DashboardServlet extends HttpServlet {
 
 	
 	
-	
-	
 	private List<Computer> getListeComputer(){
-		
-		Page page = session.getPage();
-		List<Computer> liste=service.getElementPage((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-		
-		if(session.getSearch()!=null) {
-			liste = service.getListeComputerByName(session.getSearch(),(page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-		}
-		if(session.getOrderBy()!=null) {
 
-			switch(session.getOrderBy()) {
-			case "name":{
-					liste = service.getListeComputerOrderedByName((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
-				case "introduced":{
-					liste = service.getListeComputerOrderedByIntroduced((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
-				case "discontinued":{
-					liste = service.getListeComputerOrderedByDiscontinued((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
-				
-				case "company_id":{
-					liste = service.getListeComputerOrderedByCompany((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
+		Pageable page = null;
+		if(session.getOrderBy()!=null){
+			if(this.session.getSort().equals("ASC")){
+				page = PageRequest.of(this.session.getPage().getNumeroPage()-1,this.session.getPage().getNbLigne(),Sort.by(Sort.Order.asc(this.session.getOrderBy())));
 			}
-		}
-	
-		return liste;
-	}
-	
-	
-	/*
-	@Override
-	public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		
-		
-		if(request.getParameter("new")!=null) {
-			this.search=null;
-			this.page = new Page();
-			this.sortedBy = null;
-		}
-		
-		page.setNbElementTotal(service.getNombreTotalComputer());
-		
-		if(request.getParameter("num")!=null)
-			page.setNumeroPage(page.getNumeroPage()+ Integer.parseInt(request.getParameter("num")));
-		
-		if(request.getParameter("bouton")!=null) {
-				page.setNbLigne(Integer.parseInt(request.getParameter("bouton")));
-		}
-		
-		if(request.getParameter("boutonDebFin")!=null) {
-			this.choisirPage(request.getParameter("boutonDebFin"));
-		}
-	
-		List<Computer> listeComputer= service.getElementPage((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-		
-		
-		if(request.getParameter("search")!=null) {
-			this.search = request.getParameter("search");
-		}
-		
-		if(this.search!=null) {
-			listeComputer = service.getListeComputerByName(search,(page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-			int count = service.getNbElementListeSearch(search);
-			page.setNbElementTotal(count);
-		}
-		
-		if(request.getParameter("orderBy")!=null) {
-			this.sortedBy = request.getParameter("orderBy");
-		}
-		
-		if(this.sortedBy!=null) {
-
-			switch(sortedBy) {
-			case "name":{
-					listeComputer = service.getListeComputerOrderedByName((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
-				case "introduced":{
-					listeComputer = service.getListeComputerOrderedByIntroduced((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
-				case "discontinued":{
-					listeComputer = service.getListeComputerOrderedByDiscontinued((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
-				case "company_id":{
-					listeComputer = service.getListeComputerOrderedByCompany((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne());
-					break;
-				}
+			else {
+				page = PageRequest.of(this.session.getPage().getNumeroPage()-1,this.session.getPage().getNbLigne(),Sort.by(Sort.Order.desc(this.session.getOrderBy())));
 			}
-		}
-		
-		
-		if((this.sortedBy!=null)&&(this.search!=null)) {
-			System.out.println(sortedBy);
-			System.out.println(search);
-			listeComputer = service.getListeOrdered((page.getNumeroPage()-1)*page.getNbLigne(), page.getNbLigne(),sortedBy,search);
-		}
-
-		request.setAttribute("listeComputer",listeComputer );
-		request.setAttribute("page",this.page);
-		
-		this.getServletContext().getRequestDispatcher( "/WEB-INF/views/dashboard.jsp" ).forward( request, response );
-	
-	}
-	
-	 @Override
-	public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException{
-		
-		
-			if(request.getParameter("selection")!=null) {
-				String string = request.getParameter("selection");
-				List<String> computerListID = Arrays.asList(string.split(","));
-				for(String id : computerListID) {
-					service.effacerComputer(Integer.parseInt(id));
-				}
-			}
-			
-			
-			response.sendRedirect("dashboard");
-	}
-	
-	
-	
-	private void choisirPage(String s) {
-		if(s.equals("0")) {
-			this.page.setNumeroPage(1);
 		}
 		else {
-			int nbTotal = this.page.getNbElementTotal();
-			int nbParPage = this.page.getNbLigne();
-			this.page.setNumeroPage((nbTotal%nbParPage) == 0 ? nbTotal/nbParPage : nbTotal/nbParPage +1);
-		
+			page=PageRequest.of(this.session.getPage().getNumeroPage()-1,this.session.getPage().getNbLigne());	
 		}
+		
+		List<Computer> liste =null;
+		if(session.getSearch()!=null) {
+			liste = service.getListeComputerByNameOrderBy("%"+session.getSearch()+"%",page);
+			this.session.setNbComputerFound(service.getNbElementListeSearch("%"+session.getSearch()+"%"));
+		}else {
+			 liste=service.getElementPage(page);
+		}
+		
+		
+		return liste;
 	}
-	*/
+
+	
+	
+	
+
 }

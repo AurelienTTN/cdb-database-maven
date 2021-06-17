@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import com.excilys.dto.ComputerDTO;
@@ -18,6 +19,7 @@ import com.excilys.persistence.Dao;
 public class Validator {
 	
 	@Autowired
+	@Lazy
 	private Dao dao;
 	
 
@@ -43,7 +45,6 @@ public class Validator {
 		
 		
 		String date_out = computerDTO.getDateSortie();
-		System.out.println(date_out);
 		if(date_out!=null) {
 			if(!date_out.isBlank()) {
 				try {

@@ -25,7 +25,7 @@
     <section id="main">
         <div class="container">
             <h1 id="homeTitle">
-                ${session.page.nbElementTotal } <spring:message code="computer.found"/>
+                ${session.nbComputerFound } <spring:message code="computer.found"/>
             </h1>
             <div id="actions" class="form-horizontal">
                 <div class="pull-left">
@@ -78,7 +78,7 @@
                         </th>
                         <!-- Table header for Company -->
                         <th>
-                        	<a href="order?orderBy=company_id" onclick=""> <spring:message code="company.title"/></a>
+                        	<a href="order?orderBy=company.name" onclick=""> <spring:message code="company.title"/></a>
                         </th>
 
                     </tr>
