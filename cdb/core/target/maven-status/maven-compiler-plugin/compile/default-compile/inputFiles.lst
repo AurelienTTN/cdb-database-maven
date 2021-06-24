@@ -1,3 +1,6 @@
-/home/excilys/Bureau/Maven2/cdb/core/src/main/java/com/excilys/cdb/model/Page.java
-/home/excilys/Bureau/Maven2/cdb/core/src/main/java/com/excilys/cdb/model/Company.java
-/home/excilys/Bureau/Maven2/cdb/core/src/main/java/com/excilys/cdb/model/Computer.java
+/home/excilys/Documents/git/cdb/core/src/main/java/com/excilys/cdb/model/Company.java
+/home/excilys/Documents/git/cdb/core/src/main/java/com/excilys/cdb/model/User.java
+/home/excilys/Documents/git/cdb/core/src/main/java/com/excilys/cdb/model/MyUserDetails.java
+/home/excilys/Documents/git/cdb/core/src/main/java/com/excilys/cdb/model/Page.java
+/home/excilys/Documents/git/cdb/core/src/main/java/com/excilys/cdb/model/Computer.java
+/home/excilys/Documents/git/cdb/core/src/main/java/config/AppConfig.java

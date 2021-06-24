@@ -50,6 +50,11 @@ public class DashboardServlet extends HttpServlet {
 		
 	}
 	
+	@GetMapping(value="/")
+	public String login() {
+		return "redirect:/login";
+	}
+	
 	@GetMapping(value="/new")
 	public String newDashboard() {
 		this.session = new Session();

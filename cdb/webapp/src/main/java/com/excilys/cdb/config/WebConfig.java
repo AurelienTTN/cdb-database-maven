@@ -134,7 +134,7 @@ public class WebConfig implements WebMvcConfigurer {
 			  config.setJdbcUrl( "jdbc:mysql://127.0.0.1:3306/computer-database-db" );
 	          config.setUsername( "admincdb" );
 	          config.setPassword( "qwerty1234" );
-	          config.setDriverClassName("com.mysql.jdbc.Driver");
+	          config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 	          config.addDataSourceProperty( "cachePrepStmts" , "true" );
 	          config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
 	          config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );

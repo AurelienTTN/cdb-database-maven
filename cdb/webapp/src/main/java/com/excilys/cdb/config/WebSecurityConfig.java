@@ -38,14 +38,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
-        auth.authenticationProvider(authenticationProvider());
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+       // auth.authenticationProvider(authenticationProvider());
+    	auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder().encode("a")).roles("ADMIN").and()
+    	.withUser("user").password(passwordEncoder().encode("a")).roles("USER");
     }
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().mvcMatchers("/login").permitAll()
-			.mvcMatchers("/addComputer", "/editComputer").hasRole("ADMIN")
+		http.authorizeRequests().mvcMatchers("/login","/").permitAll()
+			.mvcMatchers("/addComputer", "/editComputer","/delete").hasRole("ADMIN")
 			.anyRequest().authenticated()
 			.and().formLogin().defaultSuccessUrl("/dashboard", true)
 			.and().logout().logoutSuccessUrl("/login").deleteCookies("JSESSIONID");

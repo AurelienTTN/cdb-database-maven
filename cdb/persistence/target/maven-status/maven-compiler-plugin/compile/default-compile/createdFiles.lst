@@ -1,2 +1,3 @@
+com/excilys/cdb/daos/UserJpaDAO.class
 com/excilys/cdb/daos/CompanyJpaDAO.class
 com/excilys/cdb/daos/ComputerJpaDAO.class

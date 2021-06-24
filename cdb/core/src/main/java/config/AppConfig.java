@@ -21,9 +21,9 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@ComponentScan({"com.excilys.controlers","com.excilys.mapper",
-"com.excilys.service","com.excilys.ui","com.excilys.validator","com.excilys.persistence"})
-@EnableJpaRepositories(basePackages = {"com.excilys.persistence"})
+@ComponentScan({"com.excilys.cdb.controlers","com.excilys.cdb.mapper",
+"com.excilys.cdb.service","com.excilys.cdb.ui","com.excilys.cdb.validator","com.excilys.cdb.daos"})
+@EnableJpaRepositories(basePackages = {"com.excilys.cdb.daos"})
 @EnableTransactionManagement
 public class AppConfig {
 		
@@ -37,7 +37,7 @@ public class AppConfig {
 			  config.setJdbcUrl( "jdbc:mysql://127.0.0.1:3306/computer-database-db" );
 	          config.setUsername( "admincdb" );
 	          config.setPassword( "qwerty1234" );
-	          config.setDriverClassName("com.mysql.jdbc.Driver");
+	          config.setDriverClassName("com.mysql.cj.jdbc.Driver");
 	          config.addDataSourceProperty( "cachePrepStmts" , "true" );
 	          config.addDataSourceProperty( "prepStmtCacheSize" , "250" );
 	          config.addDataSourceProperty( "prepStmtCacheSqlLimit" , "2048" );
@@ -51,7 +51,7 @@ public class AppConfig {
 	       LocalContainerEntityManagerFactoryBean em 
 	         = new LocalContainerEntityManagerFactoryBean();
 	       em.setDataSource(this.getDataSource());
-	       em.setPackagesToScan(new String[] { "com.excilys.model" });
+	       em.setPackagesToScan(new String[] { "com.excilys.cdb.model" });
 
 	       JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 	       em.setJpaVendorAdapter(vendorAdapter);

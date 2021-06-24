@@ -1,2 +1,3 @@
-/home/excilys/Bureau/Maven2/cdb/persistence/src/main/java/com/excilys/cdb/daos/ComputerJpaDAO.java
-/home/excilys/Bureau/Maven2/cdb/persistence/src/main/java/com/excilys/cdb/daos/CompanyJpaDAO.java
+/home/excilys/Documents/git/cdb/persistence/src/main/java/com/excilys/cdb/daos/CompanyJpaDAO.java
+/home/excilys/Documents/git/cdb/persistence/src/main/java/com/excilys/cdb/daos/UserJpaDAO.java
+/home/excilys/Documents/git/cdb/persistence/src/main/java/com/excilys/cdb/daos/ComputerJpaDAO.java
