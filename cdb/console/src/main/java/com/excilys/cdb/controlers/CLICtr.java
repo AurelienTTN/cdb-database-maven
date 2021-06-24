@@ -1,4 +1,4 @@
-package com.excilys.controlers;
+package com.excilys.cdb.controlers;
 
 import org.springframework.stereotype.Controller;
 

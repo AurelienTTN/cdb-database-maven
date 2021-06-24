@@ -19,6 +19,10 @@ public class User {
 	private String role;
 	private boolean enabled;
 	
+	public User() {
+		
+	}
+	
 	public User(int id,String username,String password,String role,boolean bool) {
 		this.id=id;
 		this.username = username;
