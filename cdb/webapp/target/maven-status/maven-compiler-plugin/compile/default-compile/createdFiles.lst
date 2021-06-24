@@ -1,0 +1,7 @@
+com/excilys/cdb/servlets/DashboardServlet.class
+com/excilys/cdb/servlets/AddComputerServlet.class
+com/excilys/cdb/servlets/EditComputerServlet.class
+com/excilys/cdb/config/WebInitializer.class
+com/excilys/cdb/config/AppConfig.class
+com/excilys/cdb/config/WebConfig.class
+com/excilys/cdb/servlets/Session.class
